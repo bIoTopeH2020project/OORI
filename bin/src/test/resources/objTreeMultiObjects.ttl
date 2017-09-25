@@ -1,0 +1,41 @@
+
+<http://eis-biotope.iais.fraunhofer.de/biotope.sntiotlab.lu/SmartHouse> a odf:Object;
+    skos:id "SmartHouse";
+    odf:objects [
+        skos:id "BedRoom";
+        odf:infoitem [
+            dcterms:title "Moisture";
+            odf:value [
+                dcterms:created "2016-11-22T09:58:53.425+01:00"^^xsd:dateTime;
+                odf:dataValue -1.0^^xsd:double
+            ]
+        ]
+    ]
+    odf:objects [
+        skos:id "Kitchen";
+        odf:infoitem [
+            a odf:InfoItem;
+            dcterms:title "Moisture";
+            dcterms:description "";
+            odf:metadata [
+                odf:infoitem [
+                    dcterms:title "Accuracy";
+                    odf:value [
+                        dcterms:created "2016-11-21T11:36:53.364+01:00"^^xsd:dateTime;
+                        odf:dataValue 0.5^^xsd:double
+                    ]
+                ]
+                odf:infoitem [
+                    dcterms:title "Latency";
+                    odf:value [
+                        dcterms:created "2016-11-21T11:36:53.364+01:00"^^xsd:dateTime;
+                        odf:dataValue 2.3^^xsd:double
+                    ]
+                ]
+            ]
+            odf:value [
+                dcterms:created "016-11-22T09:48:15.946+01:00"^^xsd:dateTime;
+                odf:dataValue "metadata to be added"^^xsd:String
+            ]
+        ]
+    ].

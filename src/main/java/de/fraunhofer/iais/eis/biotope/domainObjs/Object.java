@@ -7,18 +7,20 @@ import org.eclipse.rdf4j.model.util.Namespaces;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 
 import javax.xml.bind.DatatypeConverter;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 
-@XmlRootElement
+@XmlRootElement(name="Object")
 public class Object {
 
     private String id;
-
+    private String type;
     private Collection<InfoItem> infoItems = new ArrayList<>();
     private Collection<Object> objects = new ArrayList<>();
 
@@ -31,6 +33,15 @@ public class Object {
         this.id = id;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    @XmlAttribute(name = "type")
+    public void setName(String type) {
+        this.type = type;
+    }
+    
     public Collection<InfoItem> getInfoItems() {
         return infoItems;
     }
@@ -57,10 +68,12 @@ public class Object {
         builder.setNamespace("dct", NS.DCT)
                 .setNamespace("odf", NS.ODF)
                 .setNamespace("rdf", RDF.NAMESPACE)
-
+                .setNamespace("org", NS.ORG)
                 .subject(subject)
                 .add("rdf:type", "odf:Object")
                 .add("skos:notation", id);
+        
+        builder.add("rdf:type",vf.createIRI(type));
 
         Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
@@ -73,7 +86,7 @@ public class Object {
         infoItemModels.forEach(model -> {
             builder.add("odf:infoitem", model.iterator().next().getSubject());
         });
-
+        
         nestedObjectsModels.forEach(model -> {
             builder.add("odf:object", model.iterator().next().getSubject());
         });

@@ -1,0 +1,275 @@
+<omi:omiEnvelope ttl="10.0" version="1.0" xmlns="odf.xsd" xmlns:omi="omi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <omi:write msgformat="odf">
+            <omi:msg>
+                <Objects>
+                    <Object>
+                        <id>BrusselsBikesParkingSpot</id>
+                        <Object>
+                            <id>328</id>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1480763422879" dateTime="2016-12-03T12:10:22.879+01:00" type="xs:int">9</value>
+                                <value unixTime="1480772831156" dateTime="2016-12-03T14:47:11.156+01:00" type="xs:int">10</value>
+                                <value unixTime="1480782731232" dateTime="2016-12-03T17:32:11.232+01:00" type="xs:int">11</value>
+                                <value unixTime="1480785191191" dateTime="2016-12-03T18:13:11.191+01:00" type="xs:int">10</value>
+                                <value unixTime="1480788671854" dateTime="2016-12-03T19:11:11.854+01:00" type="xs:int">9</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1480763422879" dateTime="2016-12-03T12:10:22.879+01:00" type="xs:int">11</value>
+                                <value unixTime="1480772831156" dateTime="2016-12-03T14:47:11.156+01:00" type="xs:int">10</value>
+                                <value unixTime="1480782731232" dateTime="2016-12-03T17:32:11.232+01:00" type="xs:int">9</value>
+                                <value unixTime="1480785191191" dateTime="2016-12-03T18:13:11.191+01:00" type="xs:int">10</value>
+                                <value unixTime="1480788671854" dateTime="2016-12-03T19:11:11.854+01:00" type="xs:int">11</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>83</id>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481178074711" dateTime="2016-12-08T07:21:14.711+01:00" type="xs:int">13</value>
+                                <value unixTime="1481178554537" dateTime="2016-12-08T07:29:14.537+01:00" type="xs:int">12</value>
+                                <value unixTime="1481179994831" dateTime="2016-12-08T07:53:14.831+01:00" type="xs:int">13</value>
+                                <value unixTime="1481181314542" dateTime="2016-12-08T08:15:14.542+01:00" type="xs:int">12</value>
+                                <value unixTime="1481181374578" dateTime="2016-12-08T08:16:14.578+01:00" type="xs:int">11</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481174233864" dateTime="2016-12-08T06:17:13.864+01:00" type="xs:int">11</value>
+                                <value unixTime="1481178074711" dateTime="2016-12-08T07:21:14.711+01:00" type="xs:int">12</value>
+                                <value unixTime="1481178554537" dateTime="2016-12-08T07:29:14.537+01:00" type="xs:int">13</value>
+                                <value unixTime="1481179994831" dateTime="2016-12-08T07:53:14.831+01:00" type="xs:int">12</value>
+                                <value unixTime="1481181314542" dateTime="2016-12-08T08:15:14.542+01:00" type="xs:int">13</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>203</id>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1480511709207" dateTime="2016-11-30T14:15:09.207+01:00" type="xs:int">12</value>
+                                <value unixTime="1480520949100" dateTime="2016-11-30T16:49:09.100+01:00" type="xs:int">11</value>
+                                <value unixTime="1480532589043" dateTime="2016-11-30T20:03:09.043+01:00" type="xs:int">12</value>
+                                <value unixTime="1480554129313" dateTime="2016-12-01T02:02:09.313+01:00" type="xs:int">13</value>
+                                <value unixTime="1480554729145" dateTime="2016-12-01T02:12:09.145+01:00" type="xs:int">12</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1479901324455" dateTime="2016-11-23T12:42:04.455+01:00" type="xs:int">3</value>
+                                <value unixTime="1479925504455" dateTime="2016-11-23T19:25:04.455+01:00" type="xs:int">2</value>
+                                <value unixTime="1479939004541" dateTime="2016-11-23T23:10:04.541+01:00" type="xs:int">3</value>
+                                <value unixTime="1480012265084" dateTime="2016-11-24T19:31:05.084+01:00" type="xs:int">2</value>
+                                <value unixTime="1480042325112" dateTime="2016-11-25T03:52:05.112+01:00" type="xs:int">3</value>
+                            </InfoItem>
+                            <InfoItem name="BikeStands">
+                                <value unixTime="1480326907747" dateTime="2016-11-28T10:55:07.747+01:00" type="xs:int">24</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>202</id>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1480924452627" dateTime="2016-12-05T08:54:12.627+01:00" type="xs:int">11</value>
+                                <value unixTime="1480943352595" dateTime="2016-12-05T14:09:12.595+01:00" type="xs:int">10</value>
+                                <value unixTime="1480951692881" dateTime="2016-12-05T16:28:12.881+01:00" type="xs:int">11</value>
+                                <value unixTime="1480953613078" dateTime="2016-12-05T17:00:13.078+01:00" type="xs:int">12</value>
+                                <value unixTime="1480954992581" dateTime="2016-12-05T17:23:12.581+01:00" type="xs:int">13</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1480957827650" dateTime="2016-12-05T18:10:27.650+01:00" type="xs:int">8</value>
+                                <value unixTime="1480958412612" dateTime="2016-12-05T18:20:12.612+01:00" type="xs:int">9</value>
+                                <value unixTime="1480990632490" dateTime="2016-12-06T03:17:12.490+01:00" type="xs:int">10</value>
+                                <value unixTime="1480991712460" dateTime="2016-12-06T03:35:12.460+01:00" type="xs:int">9</value>
+                                <value unixTime="1480991773391" dateTime="2016-12-06T03:36:13.391+01:00" type="xs:int">8</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>364</id>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1480609810796" dateTime="2016-12-01T17:30:10.796+01:00" type="xs:int">13</value>
+                                <value unixTime="1480611441322" dateTime="2016-12-01T17:57:21.322+01:00" type="xs:int">14</value>
+                                <value unixTime="1480611669761" dateTime="2016-12-01T18:01:09.761+01:00" type="xs:int">12</value>
+                                <value unixTime="1480612869826" dateTime="2016-12-01T18:21:09.826+01:00" type="xs:int">11</value>
+                                <value unixTime="1480614729785" dateTime="2016-12-01T18:52:09.785+01:00" type="xs:int">13</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1480609810796" dateTime="2016-12-01T17:30:10.796+01:00" type="xs:int">7</value>
+                                <value unixTime="1480611441322" dateTime="2016-12-01T17:57:21.322+01:00" type="xs:int">6</value>
+                                <value unixTime="1480611669761" dateTime="2016-12-01T18:01:09.761+01:00" type="xs:int">8</value>
+                                <value unixTime="1480612869826" dateTime="2016-12-01T18:21:09.826+01:00" type="xs:int">9</value>
+                                <value unixTime="1480614729785" dateTime="2016-12-01T18:52:09.785+01:00" type="xs:int">7</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>56</id>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481211854550" dateTime="2016-12-08T16:44:14.550+01:00" type="xs:int">6</value>
+                                <value unixTime="1481212514580" dateTime="2016-12-08T16:55:14.580+01:00" type="xs:int">5</value>
+                                <value unixTime="1481212574551" dateTime="2016-12-08T16:56:14.551+01:00" type="xs:int">6</value>
+                                <value unixTime="1481212874597" dateTime="2016-12-08T17:01:14.597+01:00" type="xs:int">7</value>
+                                <value unixTime="1481213534572" dateTime="2016-12-08T17:12:14.572+01:00" type="xs:int">6</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481211854550" dateTime="2016-12-08T16:44:14.550+01:00" type="xs:int">19</value>
+                                <value unixTime="1481212514580" dateTime="2016-12-08T16:55:14.580+01:00" type="xs:int">20</value>
+                                <value unixTime="1481212574551" dateTime="2016-12-08T16:56:14.551+01:00" type="xs:int">19</value>
+                                <value unixTime="1481212874597" dateTime="2016-12-08T17:01:14.597+01:00" type="xs:int">18</value>
+                                <value unixTime="1481213534572" dateTime="2016-12-08T17:12:14.572+01:00" type="xs:int">19</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>356</id>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1480439288587" dateTime="2016-11-29T18:08:08.587+01:00" type="xs:int">12</value>
+                                <value unixTime="1480439348412" dateTime="2016-11-29T18:09:08.412+01:00" type="xs:int">11</value>
+                                <value unixTime="1480440608571" dateTime="2016-11-29T18:30:08.571+01:00" type="xs:int">12</value>
+                                <value unixTime="1480442168466" dateTime="2016-11-29T18:56:08.466+01:00" type="xs:int">13</value>
+                                <value unixTime="1480447028347" dateTime="2016-11-29T20:17:08.347+01:00" type="xs:int">12</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1480439288587" dateTime="2016-11-29T18:08:08.587+01:00" type="xs:int">4</value>
+                                <value unixTime="1480439348412" dateTime="2016-11-29T18:09:08.412+01:00" type="xs:int">5</value>
+                                <value unixTime="1480440608571" dateTime="2016-11-29T18:30:08.571+01:00" type="xs:int">4</value>
+                                <value unixTime="1480442168466" dateTime="2016-11-29T18:56:08.466+01:00" type="xs:int">3</value>
+                                <value unixTime="1480447028347" dateTime="2016-11-29T20:17:08.347+01:00" type="xs:int">4</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>179</id>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481233934550" dateTime="2016-12-08T22:52:14.550+01:00" type="xs:int">21</value>
+                                <value unixTime="1481235074608" dateTime="2016-12-08T23:11:14.608+01:00" type="xs:int">22</value>
+                                <value unixTime="1481235914487" dateTime="2016-12-08T23:25:14.487+01:00" type="xs:int">21</value>
+                                <value unixTime="1481237714513" dateTime="2016-12-08T23:55:14.513+01:00" type="xs:int">22</value>
+                                <value unixTime="1481240234733" dateTime="2016-12-09T00:37:14.733+01:00" type="xs:int">21</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481233934550" dateTime="2016-12-08T22:52:14.550+01:00" type="xs:int">9</value>
+                                <value unixTime="1481235074608" dateTime="2016-12-08T23:11:14.608+01:00" type="xs:int">8</value>
+                                <value unixTime="1481235914487" dateTime="2016-12-08T23:25:14.487+01:00" type="xs:int">9</value>
+                                <value unixTime="1481237714513" dateTime="2016-12-08T23:55:14.513+01:00" type="xs:int">8</value>
+                                <value unixTime="1481240234733" dateTime="2016-12-09T00:37:14.733+01:00" type="xs:int">9</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>80</id>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481047093236" dateTime="2016-12-06T18:58:13.236+01:00" type="xs:int">17</value>
+                                <value unixTime="1481047286536" dateTime="2016-12-06T19:01:26.536+01:00" type="xs:int">15</value>
+                                <value unixTime="1481049193323" dateTime="2016-12-06T19:33:13.323+01:00" type="xs:int">14</value>
+                                <value unixTime="1481051833144" dateTime="2016-12-06T20:17:13.144+01:00" type="xs:int">13</value>
+                                <value unixTime="1481053573136" dateTime="2016-12-06T20:46:13.136+01:00" type="xs:int">12</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481065933199" dateTime="2016-12-07T00:12:13.199+01:00" type="xs:int">17</value>
+                                <value unixTime="1481065993501" dateTime="2016-12-07T00:13:13.501+01:00" type="xs:int">16</value>
+                                <value unixTime="1481066773208" dateTime="2016-12-07T00:26:13.208+01:00" type="xs:int">17</value>
+                                <value unixTime="1481066893151" dateTime="2016-12-07T00:28:13.151+01:00" type="xs:int">16</value>
+                                <value unixTime="1481067013162" dateTime="2016-12-07T00:30:13.162+01:00" type="xs:int">17</value>
+                            </InfoItem>
+                            <InfoItem name="Location">
+                                <value unixTime="1474454482857" dateTime="2016-09-21T12:41:22.857+02:00" type="xs:string">[50.814852,4.376794]</value>
+                            </InfoItem>
+                            <InfoItem name="BikeStands">
+                                <value unixTime="1474454482857" dateTime="2016-09-21T12:41:22.857+02:00" type="xs:int">25</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>264</id>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1480892771901" dateTime="2016-12-05T00:06:11.901+01:00" type="xs:int">0</value>
+                                <value unixTime="1480926732799" dateTime="2016-12-05T09:32:12.799+01:00" type="xs:int">1</value>
+                                <value unixTime="1480931292622" dateTime="2016-12-05T10:48:12.622+01:00" type="xs:int">2</value>
+                                <value unixTime="1480946292574" dateTime="2016-12-05T14:58:12.574+01:00" type="xs:int">3</value>
+                                <value unixTime="1480946472778" dateTime="2016-12-05T15:01:12.778+01:00" type="xs:int">2</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1480892771901" dateTime="2016-12-05T00:06:11.901+01:00" type="xs:int">20</value>
+                                <value unixTime="1480926732799" dateTime="2016-12-05T09:32:12.799+01:00" type="xs:int">19</value>
+                                <value unixTime="1480931292622" dateTime="2016-12-05T10:48:12.622+01:00" type="xs:int">18</value>
+                                <value unixTime="1480946292574" dateTime="2016-12-05T14:58:12.574+01:00" type="xs:int">17</value>
+                                <value unixTime="1480946472778" dateTime="2016-12-05T15:01:12.778+01:00" type="xs:int">18</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>100</id>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481263455247" dateTime="2016-12-09T07:04:15.247+01:00" type="xs:int">0</value>
+                                <value unixTime="1481265795181" dateTime="2016-12-09T07:43:15.181+01:00" type="xs:int">1</value>
+                                <value unixTime="1481266395249" dateTime="2016-12-09T07:53:15.249+01:00" type="xs:int">2</value>
+                                <value unixTime="1481266455397" dateTime="2016-12-09T07:54:15.397+01:00" type="xs:int">1</value>
+                                <value unixTime="1481266515484" dateTime="2016-12-09T07:55:15.484+01:00" type="xs:int">0</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481240354554" dateTime="2016-12-09T00:39:14.554+01:00" type="xs:int">28</value>
+                                <value unixTime="1481262615180" dateTime="2016-12-09T06:50:15.180+01:00" type="xs:int">27</value>
+                                <value unixTime="1481263335256" dateTime="2016-12-09T07:02:15.256+01:00" type="xs:int">28</value>
+                                <value unixTime="1481265795181" dateTime="2016-12-09T07:43:15.181+01:00" type="xs:int">27</value>
+                                <value unixTime="1481266395249" dateTime="2016-12-09T07:53:15.249+01:00" type="xs:int">26</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>314</id>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481132833762" dateTime="2016-12-07T18:47:13.762+01:00" type="xs:int">10</value>
+                                <value unixTime="1481134153876" dateTime="2016-12-07T19:09:13.876+01:00" type="xs:int">11</value>
+                                <value unixTime="1481134333951" dateTime="2016-12-07T19:12:13.951+01:00" type="xs:int">12</value>
+                                <value unixTime="1481134753834" dateTime="2016-12-07T19:19:13.834+01:00" type="xs:int">11</value>
+                                <value unixTime="1481135113817" dateTime="2016-12-07T19:25:13.817+01:00" type="xs:int">10</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481132833762" dateTime="2016-12-07T18:47:13.762+01:00" type="xs:int">20</value>
+                                <value unixTime="1481134153876" dateTime="2016-12-07T19:09:13.876+01:00" type="xs:int">19</value>
+                                <value unixTime="1481134333951" dateTime="2016-12-07T19:12:13.951+01:00" type="xs:int">18</value>
+                                <value unixTime="1481134753834" dateTime="2016-12-07T19:19:13.834+01:00" type="xs:int">19</value>
+                                <value unixTime="1481135113817" dateTime="2016-12-07T19:25:13.817+01:00" type="xs:int">20</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>150</id>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481199674522" dateTime="2016-12-08T13:21:14.522+01:00" type="xs:int">19</value>
+                                <value unixTime="1481199734457" dateTime="2016-12-08T13:22:14.457+01:00" type="xs:int">15</value>
+                                <value unixTime="1481199794569" dateTime="2016-12-08T13:23:14.569+01:00" type="xs:int">11</value>
+                                <value unixTime="1481199854548" dateTime="2016-12-08T13:24:14.548+01:00" type="xs:int">8</value>
+                                <value unixTime="1481200514432" dateTime="2016-12-08T13:35:14.432+01:00" type="xs:int">7</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481199734457" dateTime="2016-12-08T13:22:14.457+01:00" type="xs:int">9</value>
+                                <value unixTime="1481199794569" dateTime="2016-12-08T13:23:14.569+01:00" type="xs:int">13</value>
+                                <value unixTime="1481199854548" dateTime="2016-12-08T13:24:14.548+01:00" type="xs:int">16</value>
+                                <value unixTime="1481200514432" dateTime="2016-12-08T13:35:14.432+01:00" type="xs:int">17</value>
+                                <value unixTime="1481203874642" dateTime="2016-12-08T14:31:14.642+01:00" type="xs:int">18</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>20</id>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481211554365" dateTime="2016-12-08T16:39:14.365+01:00" type="xs:int">6</value>
+                                <value unixTime="1481211614447" dateTime="2016-12-08T16:40:14.447+01:00" type="xs:int">7</value>
+                                <value unixTime="1481211674608" dateTime="2016-12-08T16:41:14.608+01:00" type="xs:int">8</value>
+                                <value unixTime="1481212874601" dateTime="2016-12-08T17:01:14.601+01:00" type="xs:int">9</value>
+                                <value unixTime="1481213174558" dateTime="2016-12-08T17:06:14.558+01:00" type="xs:int">10</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481211554365" dateTime="2016-12-08T16:39:14.365+01:00" type="xs:int">14</value>
+                                <value unixTime="1481211614447" dateTime="2016-12-08T16:40:14.447+01:00" type="xs:int">13</value>
+                                <value unixTime="1481211674608" dateTime="2016-12-08T16:41:14.608+01:00" type="xs:int">12</value>
+                                <value unixTime="1481212874601" dateTime="2016-12-08T17:01:14.601+01:00" type="xs:int">11</value>
+                                <value unixTime="1481213174558" dateTime="2016-12-08T17:06:14.558+01:00" type="xs:int">10</value>
+                            </InfoItem>
+                        </Object>
+                        <Object>
+                            <id>128</id>
+                            <InfoItem name="AvailableBikeStands">
+                                <value unixTime="1481086633191" dateTime="2016-12-07T05:57:13.191+01:00" type="xs:int">20</value>
+                                <value unixTime="1481096473677" dateTime="2016-12-07T08:41:13.677+01:00" type="xs:int">19</value>
+                                <value unixTime="1481099113862" dateTime="2016-12-07T09:25:13.862+01:00" type="xs:int">18</value>
+                                <value unixTime="1481115074040" dateTime="2016-12-07T13:51:14.040+01:00" type="xs:int">17</value>
+                                <value unixTime="1481117833810" dateTime="2016-12-07T14:37:13.810+01:00" type="xs:int">16</value>
+                            </InfoItem>
+                            <InfoItem name="AvailableBikes">
+                                <value unixTime="1481086633191" dateTime="2016-12-07T05:57:13.191+01:00" type="xs:int">5</value>
+                                <value unixTime="1481096473677" dateTime="2016-12-07T08:41:13.677+01:00" type="xs:int">6</value>
+                                <value unixTime="1481099113862" dateTime="2016-12-07T09:25:13.862+01:00" type="xs:int">7</value>
+                                <value unixTime="1481115074040" dateTime="2016-12-07T13:51:14.040+01:00" type="xs:int">8</value>
+                                <value unixTime="1481117833810" dateTime="2016-12-07T14:37:13.810+01:00" type="xs:int">9</value>
+                            </InfoItem>
+                        </Object>
+                    </Object>
+                </Objects>
+            </omi:msg>
+    </omi:write>
+</omi:omiEnvelope>

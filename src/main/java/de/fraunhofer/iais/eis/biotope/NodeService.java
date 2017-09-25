@@ -1,5 +1,6 @@
 package de.fraunhofer.iais.eis.biotope;
 
+import de.fraunhofer.iais.eis.biotope.domainObjs.Object;
 import de.fraunhofer.iais.eis.biotope.exceptions.OMIRequestCreationException;
 import de.fraunhofer.iais.eis.biotope.exceptions.OMIRequestResponseException;
 import de.fraunhofer.iais.eis.biotope.exceptions.OMIRequestSendException;
@@ -39,7 +40,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Component
-class NodeService {
+public class NodeService {
 
     private final Logger logger = LoggerFactory.getLogger(NodeService.class);
     private final String CALLBACK_METHOD_PATH = "/callback";
@@ -49,6 +50,7 @@ class NodeService {
 
     private DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     private Collection<OmiNode> omiNodes = new HashSet<>();
+    private Model omiRDFModel;
     private String callbackUrl = CALLBACK_METHOD_PATH;
 
     @Autowired
@@ -97,10 +99,10 @@ class NodeService {
             logger.info("setting callback to: '" +callbackUrl+ "'");
             callback.setValue(callbackUrl);
 
-            Node envelopeNode = doc.getElementsByTagName("omi:omiEnvelope").item(0);
+            Node envelopeNode = doc.getElementsByTagName("omiEnvelope").item(0);
             envelopeNode.getAttributes().setNamedItem(ttl);
 
-            Node readNode = doc.getElementsByTagName("omi:read").item(0);
+            Node readNode = doc.getElementsByTagName("read").item(0);
             readNode.getAttributes().setNamedItem(interval);
             readNode.getAttributes().setNamedItem(callback);
 
@@ -143,7 +145,7 @@ class NodeService {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(subscriptionResponse.getEntity().getContent());
 
-            Node returnNode = doc.getElementsByTagName("omi:return").item(0);
+            Node returnNode = doc.getElementsByTagName("return").item(0);
 
             int omiStatus = getOmiDocumentReturnCode(doc);
             String omiDescription = returnNode.getAttributes().getNamedItem("description").getNodeValue();
@@ -152,7 +154,7 @@ class NodeService {
                 throw new OMIRequestResponseException("O-MI response status: " +omiStatus+ ", description: '" +omiDescription+ "'");
             }
 
-            String subscriptionId = doc.getElementsByTagName("omi:requestID").item(0).getTextContent();
+            String subscriptionId = doc.getElementsByTagName("requestID").item(0).getTextContent();
 
             logger.info("Subscription sent successfully");
             return subscriptionId;
@@ -163,7 +165,7 @@ class NodeService {
     }
 
     private int getOmiDocumentReturnCode(Document doc) {
-        Node returnNode = doc.getElementsByTagName("omi:return").item(0);
+        Node returnNode = doc.getElementsByTagName("return").item(0);
         return Integer.parseInt(returnNode.getAttributes().getNamedItem("returnCode").getNodeValue());
     }
 
@@ -175,7 +177,8 @@ class NodeService {
             Document doc = db.parse(new ByteArrayInputStream(omiMessage.getBytes(StandardCharsets.UTF_8)));
             int omiRetCode = getOmiDocumentReturnCode(doc);
             if (omiRetCode == HttpStatus.SC_OK) {
-                String odfStructure = innerXml(doc.getElementsByTagName("omi:msg").item(0));
+                String odfStructure = innerXml(doc.getElementsByTagName("msg").item(0));
+                //System.out.println(odfStructure);
                 persistOdfStructure(odfStructure);
             }
             else {
@@ -184,6 +187,28 @@ class NodeService {
         } catch (SAXException | ParserConfigurationException | IOException e) {
             throw new OMIRequestCreationException("Error parsing O-MI message", e);
         }
+    }
+    
+    public void returnOmiMessageContent(String omiMessage) {
+        logger.info("O-MI value changed");
+        Model odfData = null;
+        try {
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(new ByteArrayInputStream(omiMessage.getBytes(StandardCharsets.UTF_8)));
+            int omiRetCode = getOmiDocumentReturnCode(doc);
+            if (omiRetCode == HttpStatus.SC_OK) {
+                String odfStructure = innerXml(doc.getElementsByTagName("msg").item(0));
+                //System.out.println(odfStructure);
+                returnOdfStructure(odfStructure);
+                 
+            }
+            else {
+                logger.warn("O-MI message has error code " +omiRetCode+ ". Ignoring the message.");
+            }
+        } catch (SAXException | ParserConfigurationException | IOException e) {
+            throw new OMIRequestCreationException("Error parsing O-MI message", e);
+        }
+        
     }
 
     private String innerXml(Node node) {
@@ -202,12 +227,27 @@ class NodeService {
     }
 
     private void persistOdfStructure(String odfStructure) {
+    	
         Model odfData = odfRdfConverter.odf2rdf(new ByteArrayInputStream(odfStructure.getBytes(StandardCharsets.UTF_8)));
         odfRdfRepository.persist(odfData);
+        
+    }
+    
+    private void returnOdfStructure(String odfStructure) {
+
+    	//System.out.println(odfStructure);
+        Model odfData = odfRdfConverter.odf2rdf(new ByteArrayInputStream(odfStructure.getBytes(StandardCharsets.UTF_8)));
+        this.omiRDFModel=odfData;
+        odfRdfRepository.persist(odfData);
+        //return odfData;
     }
 
     public Collection<OmiNode> getOmiNodes() {
         return omiNodes;
+    }
+    
+    public Model getRDFModel() {
+        return omiRDFModel;
     }
 
     public void baselineSync(OmiNode omiNode) {
@@ -215,6 +255,8 @@ class NodeService {
 
         try {
             String odfContent = IOUtils.toString(response.getEntity().getContent(), Charset.defaultCharset());
+            odfContent=odfContent.replace(" xmlns=\"http://www.opengroup.org/xsd/odf/1.0/\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:odf=\"http://www.opengroup.org/xsd/odf/1.0/\"", "");
+            System.out.println(odfContent);
             persistOmiMessageContent(odfContent);
         }
         catch (IOException e) {

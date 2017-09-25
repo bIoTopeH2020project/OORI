@@ -1,0 +1,9 @@
+<Objects>
+    <Object>
+        <id>SmartHouse</id>
+        <InfoItem name="BackDoor">
+            <value unixTime="1479726703" dateTime="2016-11-21T12:11:43.055+01:00" type="xs:string">100</value>
+        </InfoItem>
+    </Object>
+</Objects>
+

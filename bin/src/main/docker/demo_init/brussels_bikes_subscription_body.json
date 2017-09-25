@@ -1,0 +1,4 @@
+{
+ "url": "http://o-mi-node:8080/",
+ "subscriptionXMLRequest": "<?xml version='1.0' encoding='UTF-8'?><omi:omiEnvelope xmlns:xs='http://www.w3.org/2001/XMLSchema-instance' xmlns:omi='omi.xsd' version='1.0' ttl='0'><omi:read msgformat='odf'><omi:msg><Objects xmlns='odf.xsd'><Object><id>BrusselsBikesParkingSpot</id></Object></Objects></omi:msg></omi:read></omi:omiEnvelope>"
+}

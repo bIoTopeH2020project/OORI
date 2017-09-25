@@ -1,5 +1,6 @@
 package de.fraunhofer.iais.eis.biotope;
 
+import de.fraunhofer.iais.eis.biotope.domainObjs.InfoItem;
 import de.fraunhofer.iais.eis.biotope.domainObjs.Object;
 import de.fraunhofer.iais.eis.biotope.domainObjs.Objects;
 import org.apache.commons.io.IOUtils;
@@ -37,22 +38,34 @@ import java.nio.charset.Charset;
 @Component
 public class OdfRdfConverter {
 
-    private final static String BASE_URI = "http://eis-biotope.iais.fraunhofer.de/";
+    private final static String BASE_URI = "https://biotope-omi.datalab.erasme.org/";
 
     private String hostname = "localhost";
 
     public Model odf2rdf(InputStream odfStructure) {
-        Objects beans = JAXB.unmarshal(odfStructure, Objects.class);
-
+    	JAXBContext jc = null;
+    	try {
+			 jc = JAXBContext.newInstance(Objects.class);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+    	Objects beans = null;
+		try {
+			beans = (Objects) jc.createUnmarshaller().unmarshal(odfStructure);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+        //Objects beans = JAXB.unmarshal(odfStructure, Objects.class);
+		
         ValueFactory vf = new MemValueFactory();
         String objectBaseIri = BASE_URI + hostname + "/obj/";
         String infoItemBaseIri = BASE_URI + hostname + "/infoitem/";
-
-        Model model = new ModelBuilder().build();
-        beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
-        //dumpModel(model);
-
-        return model;
+	    Model model = new ModelBuilder().build();
+	    beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
+		
+		return model;
     }
 
     private void dumpModel(Model model) {
@@ -64,5 +77,5 @@ public class OdfRdfConverter {
 
     public void setHostname(String hostname) {
         this.hostname = hostname;
-    }
+}
 }

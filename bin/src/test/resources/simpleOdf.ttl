@@ -1,0 +1,16 @@
+@prefix odf: <http://eis-biotope.iais.fraunhofer.de/odf#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://eis-biotope.iais.fraunhofer.de/biotope.sntiotlab.lu/obj/SmartHouse> a odf:Object;
+  skos:notation "SmartHouse";
+  odf:infoitem <http://eis-biotope.iais.fraunhofer.de/biotope.sntiotlab.lu/infoitem/Backdoor> .
+
+<http://eis-biotope.iais.fraunhofer.de/biotope.sntiotlab.lu/infoitem/Backdoor>
+    a odf:InfoItem ;
+    dct:title "BackDoor";
+    odf:value [
+        dct:created "2016-11-21T12:11:43.055+01:00"^^xsd:dateTime;
+        odf:dataValue "100"^^xsd:String
+    ].

@@ -62,7 +62,7 @@ public class InfoItem {
                 .add("dct:title", name);
 
         Collection<Model> valueModels = new HashSet<>();
-        values.forEach(value -> valueModels.add(value.serialize(vf)));
+        values.forEach(value -> valueModels.add(value.serialize(vf,name)));
 
         valueModels.forEach(model -> {
             Resource valueId = model.iterator().next().getSubject();

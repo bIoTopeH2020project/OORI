@@ -51,7 +51,7 @@ public class Value {
         this.datavalue = datavalue;
     }
 
-    public Model serialize(ValueFactory vf) {
+    public Model serialize(ValueFactory vf, String title) {
         Literal createdValue = vf.createLiteral(DatatypeConverter.parseDateTime(datetime).getTime());
         Literal dataValue = vf.createLiteral(datavalue, vf.createIRI(type));
 
@@ -66,6 +66,8 @@ public class Value {
                 .add("rdf:type", "odf:Value")
                 .add("dct:created", createdValue)
                 .add("odf:dataValue", dataValue);
+        
+        builder.add(vf.createIRI(title),dataValue);
 
         return builder.build();
     }
