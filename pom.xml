@@ -5,17 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.fhg.ids.iais</groupId>
-    <artifactId>oori</artifactId>
+    <artifactId>oorcs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>
-	    A server performing integration of multiple O-MI nodes by replicating a copy of their data in RDF format.
+	    A service for converting O-MI/O-DF responses into RDF.
     </description>
 
     <properties>
         <java.version>1.8</java.version>
         <spring-boot.version>1.3.6.RELEASE</spring-boot.version>
         <docker.image.prefix>biotope</docker.image.prefix>
-        <docker.image.name>oori</docker.image.name>
+        <docker.image.name>oorcs</docker.image.name>
     </properties>
 
     <dependencies>
@@ -129,7 +129,7 @@
                 <version>0.2.3</version>
                 <configuration>
                     <imageName>${docker.image.prefix}/${docker.image.name}</imageName>
-                    <dockerDirectory>src/main/docker/oori</dockerDirectory>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>

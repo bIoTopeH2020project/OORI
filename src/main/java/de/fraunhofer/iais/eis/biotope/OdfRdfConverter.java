@@ -38,44 +38,23 @@ import java.nio.charset.Charset;
 @Component
 public class OdfRdfConverter {
 
-    private final static String BASE_URI = "https://biotope-omi.datalab.erasme.org/";
-
-    private String hostname = "localhost";
-
-    public Model odf2rdf(InputStream odfStructure) {
-    	JAXBContext jc = null;
-    	try {
-			 jc = JAXBContext.newInstance(Objects.class);
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
-    	Objects beans = null;
-		try {
-			beans = (Objects) jc.createUnmarshaller().unmarshal(odfStructure);
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
-        //Objects beans = JAXB.unmarshal(odfStructure, Objects.class);
+    /**
+     * Converts an O-MI/O-DF response from XML format into an RDF model
+     * @param odfStructureReader XML serialization of the O-MI/O-DF response that should be converted to RDF
+     * @param baseUri Base Uri of each generated RDF resource
+     * @param omiNodeHostName Hostname of the O-MI node that provides the O-MI/O-DF response
+     * @return
+     */
+    public Model odf2rdf(Reader odfStructureReader, String baseUri, String omiNodeHostName) {
+        Objects beans = JAXB.unmarshal(odfStructureReader, Objects.class);
 		
         ValueFactory vf = new MemValueFactory();
-        String objectBaseIri = BASE_URI + hostname + "/obj/";
-        String infoItemBaseIri = BASE_URI + hostname + "/infoitem/";
+        String objectBaseIri = baseUri + omiNodeHostName + "/obj/";
+        String infoItemBaseIri = baseUri + omiNodeHostName + "/infoitem/";
 	    Model model = new ModelBuilder().build();
 	    beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
 		
 		return model;
     }
 
-    private void dumpModel(Model model) {
-        RDFWriter rdfWriter = new TurtleWriter(System.out);
-        rdfWriter.startRDF();
-        model.forEach(statment -> rdfWriter.handleStatement(statment));
-        rdfWriter.endRDF();
-    }
-
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
-}
 }

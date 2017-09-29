@@ -18,7 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class OMI2RDFTest {
+public class OdfRdfConverterTest {
 
 	private OdfRdfConverter odfRdfConverter = new OdfRdfConverter();
 	
