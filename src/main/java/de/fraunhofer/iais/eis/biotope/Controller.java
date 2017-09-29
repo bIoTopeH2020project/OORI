@@ -14,6 +14,7 @@ import org.w3c.dom.ls.LSSerializer;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -26,18 +27,17 @@ public class Controller {
     @Autowired
     private OdfRdfConverter odfRdfConverter;
 
+    private DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     private String baseUri = System.getenv("BASE_URL");
 
     @RequestMapping(value = "/toRDF", method = RequestMethod.POST)
     @ResponseBody
-    public String toRDF(@RequestBody String omiOdfXmlResponse, String omiNodeHostName)
-        throws IOException, SAXException
+    public String toRDF(@RequestBody String omiOdfXmlResponse, String omiNodeHostName) throws Exception
     {
         if (baseUri == null) baseUri = "http://localhost/";
         String odfStructure = extractOdfContent(omiOdfXmlResponse);
         Model odfData = odfRdfConverter.odf2rdf(new StringReader(odfStructure), baseUri, omiNodeHostName);
         return rdfModelToTurtle(odfData);
-
     }
 
     /**
@@ -47,7 +47,7 @@ public class Controller {
      * @param omiOdfXmlResponse The whole O-MI/O-DF response
      * @return The part of the XML response which has been passed as a parameter and which only contains O-DF information
      */
-    private String extractOdfContent(String omiOdfXmlResponse) throws IOException, SAXException {
+    private String extractOdfContent(String omiOdfXmlResponse) throws Exception {
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document doc = db.parse(new ByteArrayInputStream(omiOdfXmlResponse.getBytes(StandardCharsets.UTF_8)));
         return innerXml(doc.getElementsByTagName("msg").item(0));

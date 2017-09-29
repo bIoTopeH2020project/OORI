@@ -1,0 +1,24 @@
+<omiEnvelope ttl="10" version="1.0" xmlns="http://www.opengroup.org/xsd/omi/1.0/">
+    <response>
+        <result msgformat="odf">
+            <return returnCode="200">
+            </return>
+            <msg>
+                <Objects>
+                    <Object>
+                        <id>SmartHouse</id>
+                        <Object>
+                            <id>BedRoom</id>
+                            <InfoItem name="Moisture">
+                                <value unixTime="1506697067" type="xs:double" dateTime="2017-09-29T17:57:47.758+03:00">1.0</value>
+                            </InfoItem>
+                            <InfoItem name="Temperature">
+                                <value unixTime="1506697067" type="xs:double" dateTime="2017-09-29T17:57:47.758+03:00">1.0</value>
+                            </InfoItem>
+                        </Object>
+                    </Object>
+                </Objects>
+            </msg>
+        </result>
+    </response>
+</omiEnvelope>

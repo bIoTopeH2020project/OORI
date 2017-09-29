@@ -10,14 +10,24 @@ import org.eclipse.rdf4j.rio.RDFWriter;
 import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {OdfRdfConverter.class})
 public class OdfRdfConverterTest {
 
-    private OdfRdfConverter odfRdfConverter = new OdfRdfConverter();
+    @Autowired
+    private OdfRdfConverter odfRdfConverter;
+
     private String baseUri = "http://localhost/";
     private String omiNodeHostName = "someOmiNode";
     private ValueFactory factory = SimpleValueFactory.getInstance();
@@ -54,6 +64,8 @@ public class OdfRdfConverterTest {
 
         System.out.println(rdfModelToTurtle(rdfModel));
 
+        //todo: fix nullpointerexception
+        //todo: add assertions that check for availability of new triples that cover rdf types
     }
 
     private String rdfModelToTurtle(Model model) {
