@@ -67,7 +67,7 @@ public class Value {
                 .add("dct:created", createdValue)
                 .add("odf:dataValue", dataValue);
         
-        builder.add(vf.createIRI(title),dataValue);
+        //builder.add(vf.createIRI(title),dataValue);
 
         return builder.build();
     }

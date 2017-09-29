@@ -72,8 +72,8 @@ public class Object {
                 .subject(subject)
                 .add("rdf:type", "odf:Object")
                 .add("skos:notation", id);
-        
-        builder.add("rdf:type",vf.createIRI(type));
+
+        if (type != null) builder.add("rdf:type",vf.createIRI(type));
 
         Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";

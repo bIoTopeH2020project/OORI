@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.StringReader;
 
 @RestController
-public class Controller{
+public class Controller {
 
     @Autowired
     private OdfRdfConverter odfRdfConverter;
