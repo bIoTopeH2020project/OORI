@@ -1,0 +1,26 @@
+<Objects xmlns="http://www.opengroup.org/xsd/odf/1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:odf="http://www.opengroup.org/xsd/odf/1.0/">
+    <Object type="org:Organization">
+        <id>Organization###Metropole-de-Lyon#v0-2-2</id>
+        <Object type="org:OrganizationalUnit">
+            <id>OrganizationalUnit###DINSI</id>
+            <Object type="ssn:Deployment">
+                <id>Deployment###9ca1aa66-a9c1-44f8-ba5e-659afeaaa396</id>
+                <Object type="seas:LoRaCommunicationDevice">
+                    <id>SL-T-P1</id>
+                    <InfoItem name="geo:lon">
+                        <value unixTime="1501250425" type="xsd:double" dateTime="2017-07-28T14:00:25.069Z">4.851277</value>
+                    </InfoItem>
+                    <InfoItem name="geo:lat">
+                        <value unixTime="1501250425" type="xsd:double" dateTime="2017-07-28T14:00:25.069Z">45.763484</value>
+                    </InfoItem>
+                    <Object type="gr:Brand">
+                        <id>Brand###Sensing-Labs</id>
+                        <InfoItem name="gr:name">
+                            <value unixTime="1501250425" type="xsd:string" dateTime="2017-07-28T14:00:25.069Z">Sensing Labs</value>
+                        </InfoItem>
+                    </Object>
+                </Object>
+            </Object>
+        </Object>
+    </Object>
+</Objects>

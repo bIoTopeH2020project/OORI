@@ -47,6 +47,23 @@ public class OdfRdfConverterTest {
         // todo: implement me!
     }
 
+    @Test
+    public void omi2rdf_with_annotations() {
+        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf.xml");
+        Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
+
+        System.out.println(rdfModelToTurtle(rdfModel));
+
+    }
+
+    private String rdfModelToTurtle(Model model) {
+        RDFWriter rdfWriter = new TurtleWriter(System.out);
+        rdfWriter.startRDF();
+        model.forEach(statment -> rdfWriter.handleStatement(statment));
+        rdfWriter.endRDF();
+        return rdfWriter.toString();
+    }
+
     /*
     @Test
     public void omi2rdf_metadata_and_description() {

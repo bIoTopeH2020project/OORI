@@ -39,7 +39,7 @@ import java.nio.charset.Charset;
 public class OdfRdfConverter {
 
     /**
-     * Converts an O-MI/O-DF response from XML format into an RDF model
+     * Converts an O-DF structure from XML format into an RDF model
      * @param odfStructureReader XML serialization of the O-MI/O-DF response that should be converted to RDF
      * @param baseUri Base Uri of each generated RDF resource
      * @param omiNodeHostName Hostname of the O-MI node that provides the O-MI/O-DF response
