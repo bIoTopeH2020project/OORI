@@ -9,6 +9,7 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.rio.RDFWriter;
 import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
+import org.eclipse.rdf4j.sail.memory.model.MemValueFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,16 +81,15 @@ public class OdfRdfConverterTest {
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
-        System.out.println(Util.rdfModelToTurtle(rdfModel));
+        //the model contains 3 Objects that have 2 type definitions
+        Assert.assertEquals(3,
+                rdfModel.filter(null, RDF.TYPE, ODF.OBJECT).subjects().stream().filter(resource -> rdfModel.filter(resource, RDF.TYPE, null).objects().size() == 2).count());
 
-        //todo add assertion: the model contains 7 InfoItems that have 2 type definitions
-
-        //todo add assertion: the model contains 3 Objects that have 2 type definitions
-
-        //todo add assertion: the InfoItem of tyle isOwnedBy" name="Owner"
-
-        // remove this if all assertions are implemented
-        Assert.fail();
+        //exemplary Object that is related to an InfoItem's value literal through the InfoItem's type
+        ValueFactory vf = new MemValueFactory();
+        IRI subj = vf.createIRI("http://localhost/someOmiNode/obj/ParkingService/ParkingFacilities/DipoliParkingLot");
+        IRI pred = vf.createIRI("mv:", "isOwnedBy");
+        Assert.assertTrue(rdfModel.contains(subj, pred, null));
     }
 
     /*

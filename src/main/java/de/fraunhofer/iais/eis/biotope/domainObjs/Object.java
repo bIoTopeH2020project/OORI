@@ -1,25 +1,19 @@
 package de.fraunhofer.iais.eis.biotope.domainObjs;
 
-import de.fraunhofer.iais.eis.biotope.OdfRdfConverter;
 import de.fraunhofer.iais.eis.biotope.vocabs.NS;
 import de.fraunhofer.iais.eis.biotope.vocabs.ODF;
 import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
-import org.eclipse.rdf4j.model.util.Namespaces;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sound.midi.MidiDevice;
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 
 @XmlRootElement(name="Object")
 public class Object {
@@ -128,7 +122,7 @@ public class Object {
             if (infoItemType == null) continue;
 
             infoItem.getValues().forEach(value -> {
-                builder.add(vf.createIRI(infoItemType), value.serialize(vf).filter(null, ODF.DATAVALUE, null).objects().iterator().next());
+                builder.add(vf.createIRI(infoItemType), value.serialize(vf).filter(null, ODF.datavalue, null).objects().iterator().next());
             });
         }
     }
