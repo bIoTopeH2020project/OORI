@@ -62,25 +62,32 @@ public class OdfRdfConverterTest {
     }
 
     @Test
-    public void omi2rdf_with_standard_annotations() {
-        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
+    public void omi2rdf_with_custom_annotations() {
+        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Lyon.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
-        //todo: fix nullpointerexception
-        //todo: add assertions that check for availability of new triples that cover rdf types
+        System.out.println(Util.rdfModelToTurtle(rdfModel));
+
+        //todo add assertion: the model contains 3 resources that are of type odf:InfoItem and which have values assigned that use the properties geo:lat or geo:long or gr:name to link to their values
+
+        //todo add assertion: the model contains 4 Objects that are of type odf:Object AND one of org:Organization, org:OrganizationalUnit, seas:LoRaCommunicationDevice, gr:Brand
 
         // remove this if all assertions are implemented
         Assert.fail();
     }
 
     @Test
-    public void omi2rdf_with_custom_annotations() {
-        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Lyon.xml");
+    public void omi2rdf_with_standard_annotations() {
+        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
-        //todo: fix nullpointerexception
-        //todo: add assertions that check for availability of new triples that cover rdf types
+        System.out.println(Util.rdfModelToTurtle(rdfModel));
 
+        //todo add assertion: the model contains 7 InfoItems that have 2 type definitions
+
+        //todo add assertion: the model contains 3 Objects that have 2 type definitions
+
+        //todo add assertion: the InfoItem of tyle isOwnedBy" name="Owner"
 
         // remove this if all assertions are implemented
         Assert.fail();

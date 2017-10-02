@@ -1,10 +1,13 @@
 package de.fraunhofer.iais.eis.biotope.domainObjs;
 
+import de.fraunhofer.iais.eis.biotope.OdfRdfConverter;
 import de.fraunhofer.iais.eis.biotope.vocabs.NS;
 import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.Namespaces;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -19,8 +22,9 @@ import java.util.Iterator;
 @XmlRootElement(name="Object")
 public class Object {
 
-    private String id;
-    private String type;
+    private final Logger logger = LoggerFactory.getLogger(Object.class);
+
+    private String id, type, prefix;
     private Collection<InfoItem> infoItems = new ArrayList<>();
     private Collection<Object> objects = new ArrayList<>();
 
@@ -60,6 +64,15 @@ public class Object {
         this.objects = objects;
     }
 
+    public String getPrefix() {
+        return prefix;
+    }
+
+    @XmlAttribute(name = "prefix")
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
     public Model serialize(ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
 
         IRI subject = vf.createIRI(objectBaseIri + id);
@@ -73,7 +86,14 @@ public class Object {
                 .add("rdf:type", "odf:Object")
                 .add("skos:notation", id);
 
-        if (type != null) builder.add("rdf:type",vf.createIRI(type));
+        if (type != null) {
+            try {
+                builder.add("rdf:type", vf.createIRI(type));
+            }
+            catch (IllegalArgumentException e) {
+                logger.info("Type is not a valid IRI, omitting additional type assertion.");
+            }
+        }
 
         Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
