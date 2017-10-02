@@ -44,7 +44,7 @@ public class InfoItem {
         return type;
     }
 
-    @XmlElement(name = "type")
+    @XmlAttribute(name = "type")
     public void setType(String type) {
         this.type = type;
     }
@@ -71,7 +71,7 @@ public class InfoItem {
                 .add("dct:title", name);
 
         Collection<Model> valueModels = new HashSet<>();
-        values.forEach(value -> valueModels.add(value.serialize(vf,name)));
+        values.forEach(value -> valueModels.add(value.serialize(vf)));
 
         valueModels.forEach(model -> {
             Resource valueId = model.iterator().next().getSubject();
@@ -92,4 +92,5 @@ public class InfoItem {
 
         return infoItemModel;
     }
+
 }

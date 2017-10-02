@@ -1,6 +1,7 @@
 package de.fraunhofer.iais.eis.biotope;
 
 import de.fraunhofer.iais.eis.biotope.vocabs.NS;
+import de.fraunhofer.iais.eis.biotope.vocabs.ODF;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
@@ -31,7 +32,6 @@ public class OdfRdfConverterTest {
 
     private String baseUri = "http://localhost/";
     private String omiNodeHostName = "someOmiNode";
-    private ValueFactory factory = SimpleValueFactory.getInstance();
 
     @Test
     public void omi2rdf_simple() {
@@ -45,8 +45,7 @@ public class OdfRdfConverterTest {
         // therefore, we check that a certain information is contained in the created RDF model
 
         // make sure that the model contains exactly one ODF Object
-        IRI object = factory.createIRI(NS.ODF, "Object");
-        Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, object).size());
+        Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, ODF.OBJECT).size());
 
         // make sure that the model contains exactly one ODF InfoItem
         // todo: implement me!

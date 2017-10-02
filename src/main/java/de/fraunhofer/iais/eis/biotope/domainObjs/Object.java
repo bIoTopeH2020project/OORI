@@ -2,6 +2,7 @@ package de.fraunhofer.iais.eis.biotope.domainObjs;
 
 import de.fraunhofer.iais.eis.biotope.OdfRdfConverter;
 import de.fraunhofer.iais.eis.biotope.vocabs.NS;
+import de.fraunhofer.iais.eis.biotope.vocabs.ODF;
 import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.Namespaces;
@@ -9,6 +10,7 @@ import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sound.midi.MidiDevice;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -111,6 +113,8 @@ public class Object {
             builder.add("odf:object", model.iterator().next().getSubject());
         });
 
+        addInfoItemValues(vf, builder);
+
         Model objectModel = builder.build();
         infoItemModels.forEach(infoItemModel -> objectModel.addAll(infoItemModel));
         nestedObjectsModels.forEach(nestedObjectsModel -> objectModel.addAll(nestedObjectsModel));
@@ -118,5 +122,14 @@ public class Object {
         return objectModel;
     }
 
+    private void addInfoItemValues(ValueFactory vf, ModelBuilder builder) {
+        for (InfoItem infoItem : infoItems) {
+            String infoItemType = infoItem.getType();
+            if (infoItemType == null) continue;
 
+            infoItem.getValues().forEach(value -> {
+                builder.add(vf.createIRI(infoItemType), value.serialize(vf).filter(null, ODF.DATAVALUE, null).objects().iterator().next());
+            });
+        }
+    }
 }
