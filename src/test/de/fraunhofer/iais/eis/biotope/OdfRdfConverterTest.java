@@ -81,17 +81,9 @@ public class OdfRdfConverterTest {
         //todo: fix nullpointerexception
         //todo: add assertions that check for availability of new triples that cover rdf types
 
+
         // remove this if all assertions are implemented
         Assert.fail();
-    }
-
-    private String rdfModelToTurtle(Model model) {
-        StringWriter turtleWriter = new StringWriter();
-        RDFWriter rdfWriter = new TurtleWriter(turtleWriter);
-        rdfWriter.startRDF();
-        model.forEach(statment -> rdfWriter.handleStatement(statment));
-        rdfWriter.endRDF();
-        return turtleWriter.toString();
     }
 
     /*
