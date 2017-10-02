@@ -87,7 +87,6 @@ public class ControllerTest {
     @Test
     public void convertOmiResponse() throws Exception {
         InputStream omiResponse = getClass().getResourceAsStream("/resources/xml/omiResponse.xml");
-
         String rdf = controller.toRDF(IOUtils.toString(omiResponse, Charset.defaultCharset()), "omiNode");
 
         Model model = new LinkedHashModel();
@@ -100,6 +99,7 @@ public class ControllerTest {
         });
         parser.parse(new StringReader(rdf), "");
 
+        // RDF model is valid
         Assert.assertFalse(model.isEmpty());
     }
 

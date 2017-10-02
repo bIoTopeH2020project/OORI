@@ -1,0 +1,44 @@
+<Objects xmlns="http://www.opengroup.org/xsd/odf/1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:odf="http://www.opengroup.org/xsd/odf/1.0/">
+    <Object prefix="schema http://www.schema.org/ mv http://www.schema.mobivoc.org/" type="ParkingService">
+        <id>ParkingService</id>
+        <Object type="list">
+            <id>ParkingFacilities</id>
+            <Object type="schema:ParkingFacility">
+                <id>DipoliParkingLot</id>
+                <InfoItem name="MaxParkingHours">
+                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">20</value>
+                </InfoItem>
+                <InfoItem type="mv:isOwnedBy" name="Owner">
+                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Aalto University</value>
+                </InfoItem>
+                <Object type="list">
+                    <id>ParkingSpaceTypes</id>
+                    <Object type="mv:ParkingUsageType">
+                        <id>CarParkingSpace</id>
+                        <InfoItem type="mv:PriceParking" name="HourlyPrice">
+                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">2</value>
+                        </InfoItem>
+                        <InfoItem type="mv:hasTotalCapacity" name="TotalCapacity">
+                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">6</value>
+                        </InfoItem>
+                        <InfoItem type="mv:hasNumberOfVacantParkingSpaces" name="NumberOfVacantParkingSpaces">
+                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">6</value>
+                        </InfoItem>
+                        <Object type="schema:Vechile">
+                            <id>Vehicle</id>
+                            <InfoItem type="schema:height" name="height">
+                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">2.5m</value>
+                            </InfoItem>
+                            <InfoItem type="schema:depth" name="depth">
+                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">3m</value>
+                            </InfoItem>
+                            <InfoItem type="schema:width" name="width">
+                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">3m</value>
+                            </InfoItem>
+                        </Object>
+                    </Object>
+                </Object>
+            </Object>
+        </Object>
+    </Object>
+</Objects>

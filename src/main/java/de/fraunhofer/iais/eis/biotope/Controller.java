@@ -19,6 +19,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
 @RestController
@@ -69,11 +70,12 @@ public class Controller {
     }
 
     private String rdfModelToTurtle(Model model) {
-        RDFWriter rdfWriter = new TurtleWriter(System.out);
+        StringWriter turtleWriter = new StringWriter();
+        RDFWriter rdfWriter = new TurtleWriter(turtleWriter);
         rdfWriter.startRDF();
         model.forEach(statment -> rdfWriter.handleStatement(statment));
         rdfWriter.endRDF();
-        return rdfWriter.toString();
+        return turtleWriter.toString();
     }
 
 }

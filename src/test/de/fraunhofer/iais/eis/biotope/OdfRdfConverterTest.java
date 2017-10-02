@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {OdfRdfConverter.class})
@@ -55,25 +56,42 @@ public class OdfRdfConverterTest {
 
         // make sure that the value of the InfoItem has a data value timestamp with value "100"
         // todo: implement me!
+
+        // remove this if all assertions are implemented
+        Assert.fail();
     }
 
     @Test
-    public void omi2rdf_with_annotations() {
-        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf.xml");
+    public void omi2rdf_with_standard_annotations() {
+        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
-
-        System.out.println(rdfModelToTurtle(rdfModel));
 
         //todo: fix nullpointerexception
         //todo: add assertions that check for availability of new triples that cover rdf types
+
+        // remove this if all assertions are implemented
+        Assert.fail();
+    }
+
+    @Test
+    public void omi2rdf_with_custom_annotations() {
+        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Lyon.xml");
+        Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
+
+        //todo: fix nullpointerexception
+        //todo: add assertions that check for availability of new triples that cover rdf types
+
+        // remove this if all assertions are implemented
+        Assert.fail();
     }
 
     private String rdfModelToTurtle(Model model) {
-        RDFWriter rdfWriter = new TurtleWriter(System.out);
+        StringWriter turtleWriter = new StringWriter();
+        RDFWriter rdfWriter = new TurtleWriter(turtleWriter);
         rdfWriter.startRDF();
         model.forEach(statment -> rdfWriter.handleStatement(statment));
         rdfWriter.endRDF();
-        return rdfWriter.toString();
+        return turtleWriter.toString();
     }
 
     /*
