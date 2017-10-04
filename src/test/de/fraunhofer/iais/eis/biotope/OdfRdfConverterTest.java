@@ -1,6 +1,7 @@
 package de.fraunhofer.iais.eis.biotope;
 
 import de.fraunhofer.iais.eis.biotope.vocabs.NS;
+import de.fraunhofer.iais.eis.biotope.vocabs.ODF;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
@@ -10,6 +11,7 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.rio.RDFWriter;
 import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
+import org.eclipse.rdf4j.sail.memory.model.MemValueFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,8 +54,8 @@ public class OdfRdfConverterTest {
 
         // make sure that the model contains exactly one ODF InfoItem
         // todo: implement me!
-        IRI object = factory.createIRI(NS.ODF, "InfoItem");
-        Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, object).size());
+        IRI infoItem = factory.createIRI(NS.ODF, "InfoItem");
+        Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, infoItem).size());
         
         // make sure that the value of the InfoItem has a timestamp
         // todo: implement me!
@@ -89,28 +91,34 @@ public class OdfRdfConverterTest {
     }
 
     @Test
-    public void omi2rdf_with_standard_annotations() {
-        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
+    public void omi2rdf_with_custom_annotations() {
+        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Lyon.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
-        //todo: fix nullpointerexception
-        //todo: add assertions that check for availability of new triples that cover rdf types
+        System.out.println(Util.rdfModelToTurtle(rdfModel));
+
+        //todo add assertion: the model contains 3 resources that are of type odf:InfoItem and which have values assigned that use the properties geo:lat or geo:long or gr:name to link to their values
+
+        //todo add assertion: the model contains 4 Objects that are of type odf:Object AND one of org:Organization, org:OrganizationalUnit, seas:LoRaCommunicationDevice, gr:Brand
 
         // remove this if all assertions are implemented
         Assert.fail();
     }
 
     @Test
-    public void omi2rdf_with_custom_annotations() {
-        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Lyon.xml");
+    public void omi2rdf_with_standard_annotations() {
+        InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
-        //todo: fix nullpointerexception
-        //todo: add assertions that check for availability of new triples that cover rdf types
+        //the model contains 3 Objects that have 2 type definitions
+        Assert.assertEquals(3,
+                rdfModel.filter(null, RDF.TYPE, ODF.OBJECT).subjects().stream().filter(resource -> rdfModel.filter(resource, RDF.TYPE, null).objects().size() == 2).count());
 
-
-        // remove this if all assertions are implemented
-        Assert.fail();
+        //exemplary Object that is related to an InfoItem's value literal through the InfoItem's type
+        ValueFactory vf = new MemValueFactory();
+        IRI subj = vf.createIRI("http://localhost/someOmiNode/obj/ParkingService/ParkingFacilities/DipoliParkingLot");
+        IRI pred = vf.createIRI("mv:", "isOwnedBy");
+        Assert.assertTrue(rdfModel.contains(subj, pred, null));
     }
 
     /*

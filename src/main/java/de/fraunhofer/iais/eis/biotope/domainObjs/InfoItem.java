@@ -18,7 +18,7 @@ import java.util.HashSet;
 @XmlRootElement
 public class InfoItem {
 
-    private String name;
+    private String name, type;
     private Collection<Value> values = new ArrayList<>();
     private Collection<MetaData> metaData = new ArrayList<>();
 
@@ -38,6 +38,15 @@ public class InfoItem {
     @XmlElement(name = "value")
     public void setValues(Collection<Value> values) {
         this.values = values;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @XmlAttribute(name = "type")
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Collection<MetaData> getMetaData() {
@@ -62,7 +71,7 @@ public class InfoItem {
                 .add("dct:title", name);
 
         Collection<Model> valueModels = new HashSet<>();
-        values.forEach(value -> valueModels.add(value.serialize(vf,name)));
+        values.forEach(value -> valueModels.add(value.serialize(vf)));
 
         valueModels.forEach(model -> {
             Resource valueId = model.iterator().next().getSubject();
@@ -83,4 +92,5 @@ public class InfoItem {
 
         return infoItemModel;
     }
+
 }

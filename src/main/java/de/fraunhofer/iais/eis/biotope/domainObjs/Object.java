@@ -1,26 +1,26 @@
 package de.fraunhofer.iais.eis.biotope.domainObjs;
 
 import de.fraunhofer.iais.eis.biotope.vocabs.NS;
+import de.fraunhofer.iais.eis.biotope.vocabs.ODF;
 import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
-import org.eclipse.rdf4j.model.util.Namespaces;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 
 @XmlRootElement(name="Object")
 public class Object {
 
-    private String id;
-    private String type;
+    private final Logger logger = LoggerFactory.getLogger(Object.class);
+
+    private String id, type, prefix;
     private Collection<InfoItem> infoItems = new ArrayList<>();
     private Collection<Object> objects = new ArrayList<>();
 
@@ -41,7 +41,7 @@ public class Object {
     public void setName(String type) {
         this.type = type;
     }
-    
+
     public Collection<InfoItem> getInfoItems() {
         return infoItems;
     }
@@ -60,6 +60,15 @@ public class Object {
         this.objects = objects;
     }
 
+    public String getPrefix() {
+        return prefix;
+    }
+
+    @XmlAttribute(name = "prefix")
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
     public Model serialize(ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
 
         IRI subject = vf.createIRI(objectBaseIri + id);
@@ -73,7 +82,14 @@ public class Object {
                 .add("rdf:type", "odf:Object")
                 .add("skos:notation", id);
 
-        if (type != null) builder.add("rdf:type",vf.createIRI(type));
+        if (type != null) {
+            try {
+                builder.add("rdf:type", vf.createIRI(type));
+            }
+            catch (IllegalArgumentException e) {
+                logger.info("Type is not a valid IRI, omitting additional type assertion.");
+            }
+        }
 
         Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
@@ -86,10 +102,12 @@ public class Object {
         infoItemModels.forEach(model -> {
             builder.add("odf:infoitem", model.iterator().next().getSubject());
         });
-        
+
         nestedObjectsModels.forEach(model -> {
             builder.add("odf:object", model.iterator().next().getSubject());
         });
+
+        addInfoItemValues(vf, builder);
 
         Model objectModel = builder.build();
         infoItemModels.forEach(infoItemModel -> objectModel.addAll(infoItemModel));
@@ -98,5 +116,14 @@ public class Object {
         return objectModel;
     }
 
+    private void addInfoItemValues(ValueFactory vf, ModelBuilder builder) {
+        for (InfoItem infoItem : infoItems) {
+            String infoItemType = infoItem.getType();
+            if (infoItemType == null) continue;
 
+            infoItem.getValues().forEach(value -> {
+                builder.add(vf.createIRI(infoItemType), value.serialize(vf).filter(null, ODF.datavalue, null).objects().iterator().next());
+            });
+        }
+    }
 }
