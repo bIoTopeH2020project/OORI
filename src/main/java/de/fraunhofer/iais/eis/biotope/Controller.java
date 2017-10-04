@@ -38,7 +38,7 @@ public class Controller {
         if (baseUri == null) baseUri = "http://localhost/";
         String odfStructure = extractOdfContent(omiOdfXmlResponse);
         Model odfData = odfRdfConverter.odf2rdf(new StringReader(odfStructure), baseUri, omiNodeHostName);
-        return Util.rdfModelToTurtle(odfData);
+        return rdfModelToTurtle(odfData);
     }
 
     /**
@@ -50,6 +50,7 @@ public class Controller {
      */
     private String extractOdfContent(String omiOdfXmlResponse) throws Exception {
         DocumentBuilder db = dbf.newDocumentBuilder();
+        System.out.println(omiOdfXmlResponse);
         Document doc = db.parse(new ByteArrayInputStream(omiOdfXmlResponse.getBytes(StandardCharsets.UTF_8)));
         return innerXml(doc.getElementsByTagName("msg").item(0));
     }
@@ -67,6 +68,15 @@ public class Controller {
             sb.append(lsSerializer.writeToString(childNodes.item(i)));
         }
         return sb.toString();
+    }
+
+    private String rdfModelToTurtle(Model model) {
+        StringWriter turtleWriter = new StringWriter();
+        RDFWriter rdfWriter = new TurtleWriter(turtleWriter);
+        rdfWriter.startRDF();
+        model.forEach(statment -> rdfWriter.handleStatement(statment));
+        rdfWriter.endRDF();
+        return turtleWriter.toString();
     }
 
 }
