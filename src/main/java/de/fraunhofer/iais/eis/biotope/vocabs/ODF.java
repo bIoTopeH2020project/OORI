@@ -14,9 +14,12 @@ public class ODF {
     // classes
     public final static IRI OBJECT = factory.createIRI(NS.ODF, "Object");
     public final static IRI INFOITEM = factory.createIRI(NS.ODF, "InfoItem");
+    public final static IRI Value = factory.createIRI(NS.ODF, "Value");
 
     // properties
     public final static IRI datavalue = factory.createIRI(NS.ODF, "dataValue");
     public final static IRI infoitem = factory.createIRI(NS.ODF, "infoitem");
+    public final static IRI timeStamp = factory.createIRI(NS.DCT, "created");
+    //(NS.DCT, "created")
 
 }

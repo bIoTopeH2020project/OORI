@@ -49,32 +49,26 @@ public class OdfRdfConverterTest {
         // therefore, we check that a certain information is contained in the created RDF model
 
         // make sure that the model contains exactly one ODF Object
-        IRI object = factory.createIRI(NS.ODF, "Object");
-        Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, object).size());
+        Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, ODF.OBJECT).size());
 
         // make sure that the model contains exactly one ODF InfoItem
         // todo: implement me!
-        IRI infoItem = factory.createIRI(NS.ODF, "InfoItem");
-        Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, infoItem).size());
+        Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, ODF.INFOITEM).size());
         
         // make sure that the value of the InfoItem has a timestamp
         // todo: implement me!
-        IRI object3 = factory.createIRI(NS.ODF, "Value");	        
-        rdfModel.filter(null, RDF.TYPE, object3).forEach(info->{
-        														IRI object4 = factory.createIRI(NS.DCT, "created");
-        														Assert.assertEquals(1,rdfModel.filter(info.getSubject(),object4,null).size());});
+        rdfModel.filter(null, RDF.TYPE, ODF.Value).forEach(info->{
+        														Assert.assertEquals(1,rdfModel.filter(info.getSubject(),ODF.timeStamp,null).size());});
         
 
         // make sure that the value of the InfoItem has a data value timestamp with value "20.3125"
         // todo: implement me!
-        IRI object5 = factory.createIRI(NS.ODF, "Value");	        
-        Model filteredModel=rdfModel.filter(null, RDF.TYPE, object5);
+        Model filteredModel=rdfModel.filter(null, RDF.TYPE, ODF.Value);
         boolean flag=false;
-        IRI object6 = factory.createIRI(NS.ODF, "dataValue");
 		Literal value=factory.createLiteral("20.3125", factory.createIRI("xsd:decimal"));
         for (Statement info : filteredModel) {
 			try{
-				Assert.assertTrue(rdfModel.contains(info.getSubject(),object6,value));
+				Assert.assertTrue(rdfModel.contains(info.getSubject(),ODF.datavalue,value));
 				flag=true;
 				break;
 			}
@@ -87,11 +81,12 @@ public class OdfRdfConverterTest {
         	System.out.println("Value not found");
 
         // remove this if all assertions are implemented
-        Assert.fail();
+        //Assert.fail();
     }
 
     @Test
     public void omi2rdf_with_custom_annotations() {
+    	
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Lyon.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
