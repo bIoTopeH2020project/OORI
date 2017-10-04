@@ -117,7 +117,7 @@ public class Object {
     }
 
     private void addNamespaces(Model model) {
-        // todo: parse this Object's prefix field for namespace definitions and add them using rdfModel.setNamespace("mv", "mobivoc");
+        // todo: parse this Object's prefix field for namespace definitions and add them using model.setNamespace("mv", "mobivoc");
         // todo: if the prefix field is empty add all the namespaces that are defined in NS.java
     }
 
