@@ -105,6 +105,8 @@ public class OdfRdfConverterTest {
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
+        System.out.println(Util.rdfModelToTurtle(rdfModel));
+
         //the model contains 3 Objects that have 2 type definitions
         Assert.assertEquals(3,
                 rdfModel.filter(null, RDF.TYPE, ODF.OBJECT).subjects().stream().filter(resource -> rdfModel.filter(resource, RDF.TYPE, null).objects().size() == 2).count());

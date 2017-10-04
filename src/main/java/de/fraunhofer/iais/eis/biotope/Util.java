@@ -12,6 +12,7 @@ public class Util {
         StringWriter turtleWriter = new StringWriter();
         RDFWriter rdfWriter = new TurtleWriter(turtleWriter);
         rdfWriter.startRDF();
+        model.getNamespaces().forEach(ns -> rdfWriter.handleNamespace(ns.getPrefix(), ns.getName()));
         model.forEach(statment -> rdfWriter.handleStatement(statment));
         rdfWriter.endRDF();
         return turtleWriter.toString();
