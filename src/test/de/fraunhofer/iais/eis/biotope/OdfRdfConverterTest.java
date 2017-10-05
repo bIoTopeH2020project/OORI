@@ -57,8 +57,7 @@ public class OdfRdfConverterTest {
         
         // make sure that the value of the InfoItem has a timestamp
         // todo: implement me!
-        rdfModel.filter(null, RDF.TYPE, ODF.Value).forEach(info->{
-        														Assert.assertEquals(1,rdfModel.filter(info.getSubject(),ODF.timeStamp,null).size());});
+        rdfModel.filter(null, RDF.TYPE, ODF.Value).forEach(info->{Assert.assertEquals(1,rdfModel.filter(info.getSubject(),ODF.timeStamp,null).size());});
         
 
         // make sure that the value of the InfoItem has a data value timestamp with value "20.3125"
@@ -93,11 +92,25 @@ public class OdfRdfConverterTest {
         System.out.println(Util.rdfModelToTurtle(rdfModel));
 
         //todo add assertion: the model contains 3 resources that are of type odf:InfoItem and which have values assigned that use the properties geo:lat or geo:long or gr:name to link to their values
+        Model model=rdfModel.filter(null, RDF.TYPE, ODF.INFOITEM);
+        int counter=0;
+        for (Statement info : model) {
+			if (info.getSubject().toString().contains("gr:name")||info.getSubject().toString().contains("geo:long")||info.getSubject().toString().contains("geo:lat"))
+				counter++;
+		}
+        Assert.assertEquals(3, counter);
 
         //todo add assertion: the model contains 4 Objects that are of type odf:Object AND one of org:Organization, org:OrganizationalUnit, seas:LoRaCommunicationDevice, gr:Brand
-
+        Model model2=rdfModel.filter(null, RDF.TYPE, ODF.OBJECT);
+        int counter2=0;
+        for (Statement info : model2) {
+        	if (rdfModel.contains(info.getSubject(),RDF.TYPE,ODF.org)||rdfModel.contains(info.getSubject(),RDF.TYPE,ODF.orgU)||rdfModel.contains(info.getSubject(),RDF.TYPE,ODF.seas)||rdfModel.contains(info.getSubject(),RDF.TYPE,ODF.gr))
+				counter2++;
+		}
+        Assert.assertEquals(4, counter2);
+        
         // remove this if all assertions are implemented
-        Assert.fail();
+       // Assert.fail();
     }
 
     @Test

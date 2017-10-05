@@ -20,6 +20,11 @@ public class ODF {
     public final static IRI datavalue = factory.createIRI(NS.ODF, "dataValue");
     public final static IRI infoitem = factory.createIRI(NS.ODF, "infoitem");
     public final static IRI timeStamp = factory.createIRI(NS.DCT, "created");
-    //(NS.DCT, "created")
+    public final static IRI title = factory.createIRI(NS.DCT,"title");
+    
+    public final static IRI org = factory.createIRI("org:Organization");
+    public final static IRI orgU = factory.createIRI("org:OrganizationalUnit");
+    public final static IRI seas = factory.createIRI("seas:LoRaCommunicationDevice");
+    public final static IRI gr = factory.createIRI("gr:Brand");
 
 }
