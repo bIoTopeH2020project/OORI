@@ -2,11 +2,7 @@ package de.fraunhofer.iais.eis.biotope;
 
 import de.fraunhofer.iais.eis.biotope.vocabs.NS;
 import de.fraunhofer.iais.eis.biotope.vocabs.ODF;
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Literal;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.rio.RDFWriter;
@@ -52,35 +48,18 @@ public class OdfRdfConverterTest {
         Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, ODF.OBJECT).size());
 
         // make sure that the model contains exactly one ODF InfoItem
-        // todo: implement me!
         Assert.assertEquals(1, rdfModel.filter(null, RDF.TYPE, ODF.INFOITEM).size());
         
         // make sure that the value of the InfoItem has a timestamp
-        // todo: implement me!
-        rdfModel.filter(null, RDF.TYPE, ODF.Value).forEach(info->{Assert.assertEquals(1,rdfModel.filter(info.getSubject(),ODF.timeStamp,null).size());});
-        
+        rdfModel.filter(null, RDF.TYPE, ODF.Value).forEach(info->{
+            Assert.assertEquals(1,rdfModel.filter(info.getSubject(),ODF.timeStamp,null).size());
+        });
 
         // make sure that the value of the InfoItem has a data value timestamp with value "20.3125"
-        // todo: implement me!
-        Model filteredModel=rdfModel.filter(null, RDF.TYPE, ODF.Value);
-        boolean flag=false;
-		Literal value=factory.createLiteral("20.3125", factory.createIRI("xsd:decimal"));
-        for (Statement info : filteredModel) {
-			try{
-				Assert.assertTrue(rdfModel.contains(info.getSubject(),ODF.datavalue,value));
-				flag=true;
-				break;
-			}
-			catch (AssertionError e)
-			{
-				
-			}
-		}
-        if (flag==false)
-        	System.out.println("Value not found");
-
-        // remove this if all assertions are implemented
-        //Assert.fail();
+        Resource infoItem = rdfModel.filter(null, RDF.TYPE, ODF.INFOITEM).subjects().iterator().next();
+        Resource valueNode = (Resource) rdfModel.filter(infoItem, ODF.value, null).objects().iterator().next();
+        Literal valueLiteral = (Literal) rdfModel.filter(valueNode, ODF.datavalue, null).objects().iterator().next();
+        Assert.assertEquals("100", valueLiteral.stringValue());
     }
 
     @Test
