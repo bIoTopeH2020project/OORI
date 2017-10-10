@@ -63,7 +63,11 @@ public class OdfRdfConverter {
             ValueFactory vf = new MemValueFactory();
             String objectBaseIri = baseUri + omiNodeHostName + "/obj/";
             String infoItemBaseIri = baseUri + omiNodeHostName + "/infoitem/";
-            beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
+
+            beans.getObjects().forEach(objectBean -> {
+                Model objectModel = objectBean.serialize(vf, objectBaseIri, infoItemBaseIri);
+                model.addAll(objectModel);
+            });
         }
         catch (JAXBException | XMLStreamException e) {
             logger.error("Error reading O-DF structure", e);

@@ -12,8 +12,8 @@ public class ODF {
     private static ValueFactory factory = SimpleValueFactory.getInstance();
 
     // classes
-    public final static IRI OBJECT = factory.createIRI(NS.ODF, "Object");
-    public final static IRI INFOITEM = factory.createIRI(NS.ODF, "InfoItem");
+    public final static IRI Object = factory.createIRI(NS.ODF, "Object");
+    public final static IRI InfoItem = factory.createIRI(NS.ODF, "InfoItem");
     public final static IRI Value = factory.createIRI(NS.ODF, "Value");
 
     // properties
@@ -22,10 +22,5 @@ public class ODF {
     public final static IRI timeStamp = factory.createIRI(NS.DCT, "created");
     public final static IRI title = factory.createIRI(NS.DCT,"title");
     public final static IRI value = factory.createIRI(NS.ODF, "value");
-    
-    public final static IRI org = factory.createIRI("org:Organization");
-    public final static IRI orgU = factory.createIRI("org:OrganizationalUnit");
-    public final static IRI seas = factory.createIRI("seas:LoRaCommunicationDevice");
-    public final static IRI gr = factory.createIRI("gr:Brand");
 
 }
