@@ -58,7 +58,7 @@ public class InfoItem {
         this.metaData = metaData;
     }
 
-    public Model serialize(ValueFactory vf, String infoItemBaseIri) {
+    public IRI serialize(Model model, ValueFactory vf, String infoItemBaseIri) {
         IRI subject = vf.createIRI(infoItemBaseIri + name);
 
         ModelBuilder builder = new ModelBuilder();
@@ -90,7 +90,7 @@ public class InfoItem {
         valueModels.forEach(valueModel -> infoItemModel.addAll(valueModel));
         metaDataModels.forEach(metadataModel -> infoItemModel.addAll(metadataModel));
 
-        return infoItemModel;
+        return subject;
     }
 
 }

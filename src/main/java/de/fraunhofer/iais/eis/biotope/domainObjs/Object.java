@@ -70,17 +70,12 @@ public class Object {
         this.prefix = prefix;
     }
 
-    public Model serialize(ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
+    public IRI serialize(Model model, ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
 
         IRI subject = vf.createIRI(objectBaseIri + id);
 
-        ModelBuilder builder = new ModelBuilder();
-        addNamespaces(builder);
-        builder.setNamespace("dct", NS.DCT)
-                .setNamespace("odf", NS.ODF)
-                .setNamespace("rdf", RDF.NAMESPACE)
-                .setNamespace("org", NS.ORG)
-                .subject(subject)
+        ModelBuilder builder = new ModelBuilder(model);
+        builder.subject(subject)
                 .add("rdf:type", "odf:Object")
                 .add("skos:notation", id);
 
@@ -114,25 +109,10 @@ public class Object {
         Model objectModel = builder.build();
         infoItemModels.forEach(infoItemModel -> objectModel.addAll(infoItemModel));
         nestedObjectsModels.forEach(nestedObjectsModel -> objectModel.addAll(nestedObjectsModel));
-        return objectModel;
+        return subject;
     }
 
-    private void addNamespaces(ModelBuilder builder) {
-        if (prefix == null) return;
 
-        StringTokenizer tokenizer = new StringTokenizer(prefix, " ");
-        if (tokenizer.countTokens() % 2 != 0) {
-            logger.error("Odd number of prefix definitions");
-            return;
-        }
-
-        while (tokenizer.hasMoreTokens()) {
-            String prefix = tokenizer.nextToken();
-            String url = tokenizer.nextToken();
-
-            builder.setNamespace(prefix, url);
-        }
-    }
 
     private void addInfoItemValues(ValueFactory vf, ModelBuilder builder) {
         for (InfoItem infoItem : infoItems) {

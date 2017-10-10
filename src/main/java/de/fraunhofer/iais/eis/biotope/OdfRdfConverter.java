@@ -3,12 +3,14 @@ package de.fraunhofer.iais.eis.biotope;
 import de.fraunhofer.iais.eis.biotope.domainObjs.InfoItem;
 import de.fraunhofer.iais.eis.biotope.domainObjs.Object;
 import de.fraunhofer.iais.eis.biotope.domainObjs.Objects;
+import de.fraunhofer.iais.eis.biotope.vocabs.NS;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ModelFactory;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.rio.RDFWriter;
 import org.eclipse.rdf4j.rio.turtle.TurtleWriter;
 import org.eclipse.rdf4j.sail.memory.model.MemValueFactory;
@@ -40,6 +42,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.StringTokenizer;
 
 @Component
 public class OdfRdfConverter {
@@ -54,26 +57,20 @@ public class OdfRdfConverter {
      * @param omiNodeHostName Hostname of the O-MI node that provides the O-MI/O-DF response
      * @return
      */
-    public Model odf2rdf(Reader odfStructureReader, String baseUri, String omiNodeHostName) {
-        Model model = new ModelBuilder().build();
+    public Model odf2rdf(Reader odfStructureReader, String baseUri, String omiNodeHostName)
+        throws JAXBException, XMLStreamException
+    {
+        Objects beans = unmarshalObjects(odfStructureReader);
+        Model model = prepareModel(beans);
 
-        try {
-            Objects beans = unmarshalObjects(odfStructureReader);
+        ValueFactory vf = new MemValueFactory();
+        String objectBaseIri = baseUri + omiNodeHostName + "/obj/";
+        String infoItemBaseIri = baseUri + omiNodeHostName + "/infoitem/";
 
-            ValueFactory vf = new MemValueFactory();
-            String objectBaseIri = baseUri + omiNodeHostName + "/obj/";
-            String infoItemBaseIri = baseUri + omiNodeHostName + "/infoitem/";
-
-            beans.getObjects().forEach(objectBean -> {
-                Model objectModel = objectBean.serialize(vf, objectBaseIri, infoItemBaseIri);
-                model.addAll(objectModel);
-            });
-        }
-        catch (JAXBException | XMLStreamException e) {
-            logger.error("Error reading O-DF structure", e);
-        }
-
-		return model;
+        beans.getObjects().forEach(objectBean -> {
+            objectBean.serialize(model, vf, objectBaseIri, infoItemBaseIri);
+        });
+        return model;
     }
 
     private Objects unmarshalObjects(Reader odfStructureReader) throws JAXBException, XMLStreamException {
@@ -89,4 +86,37 @@ public class OdfRdfConverter {
         return (Objects) unmarshaller.unmarshal(xsr);
     }
 
+    private Model prepareModel(Objects beans) {
+        Model model = new ModelBuilder().build();
+        addDefaultNamespaces(model);
+
+        beans.getObjects().forEach(objectBean -> {
+            addCustomNamespaces(model, objectBean);
+        });
+
+        return model;
+    }
+
+    private void addDefaultNamespaces(Model model) {
+        model.setNamespace("dct", NS.DCT);
+        model.setNamespace("odf", NS.ODF);
+        model.setNamespace("rdf", RDF.NAMESPACE);
+    }
+
+    private void addCustomNamespaces(Model model, Object object) {
+        if (object.getPrefix() == null) return;
+
+        StringTokenizer tokenizer = new StringTokenizer(object.getPrefix(), " ");
+        if (tokenizer.countTokens() % 2 != 0) {
+            logger.error("Odd number of prefix definitions");
+            return;
+        }
+
+        while (tokenizer.hasMoreTokens()) {
+            String prefix = tokenizer.nextToken();
+            String url = tokenizer.nextToken();
+
+            model.setNamespace(prefix, url);
+        }
+    }
 }
