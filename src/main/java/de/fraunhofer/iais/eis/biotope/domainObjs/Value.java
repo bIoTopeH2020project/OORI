@@ -7,6 +7,7 @@ import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.Namespaces;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.eclipse.rdf4j.sail.memory.model.MemValueFactory;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.Element;
@@ -51,7 +52,8 @@ public class Value {
         this.datavalue = datavalue;
     }
 
-    public Model serialize(ValueFactory vf) {
+    public BNode serialize(Model model) {
+        ValueFactory vf = new MemValueFactory();
         Literal createdValue = vf.createLiteral(DatatypeConverter.parseDateTime(datetime).getTime());
 
         Literal dataValue;
@@ -64,16 +66,12 @@ public class Value {
 
         BNode subject = vf.createBNode();
 
-        ModelBuilder builder = new ModelBuilder();
-        builder.setNamespace("dct", NS.DCT)
-                .setNamespace("odf", NS.ODF)
-                .setNamespace("rdf", RDF.NAMESPACE)
-
-                .subject(subject)
+        ModelBuilder builder = new ModelBuilder(model);
+        builder.subject(subject)
                 .add("rdf:type", "odf:Value")
                 .add("dct:created", createdValue)
                 .add("odf:dataValue", dataValue);
 
-        return builder.build();
+        return subject;
     }
 }

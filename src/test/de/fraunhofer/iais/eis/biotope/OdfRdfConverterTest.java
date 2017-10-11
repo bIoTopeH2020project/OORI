@@ -12,6 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.security.auth.Subject;
+import javax.sound.sampled.SourceDataLine;
+import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLStreamException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -27,7 +30,7 @@ public class OdfRdfConverterTest {
     private String omiNodeHostName = "someOmiNode";
 
     @Test
-    public void omi2rdf_simple() {
+    public void omi2rdf_simple() throws JAXBException, XMLStreamException {
         // get the O-MI/O-DF response which we want to use in our test as an input
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/simpleOdf.xml");
 
@@ -56,7 +59,7 @@ public class OdfRdfConverterTest {
     }
 
     @Test
-    public void omi2rdf_with_custom_annotations() {
+    public void omi2rdf_with_custom_annotations() throws JAXBException, XMLStreamException {
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Lyon.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
@@ -90,7 +93,7 @@ public class OdfRdfConverterTest {
     }
 
     @Test
-    public void omi2rdf_with_standard_annotations() {
+    public void omi2rdf_with_standard_annotations() throws JAXBException, XMLStreamException {
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 

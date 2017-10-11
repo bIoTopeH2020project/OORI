@@ -63,12 +63,11 @@ public class OdfRdfConverter {
         Objects beans = unmarshalObjects(odfStructureReader);
         Model model = prepareModel(beans);
 
-        ValueFactory vf = new MemValueFactory();
         String objectBaseIri = baseUri + omiNodeHostName + "/obj/";
         String infoItemBaseIri = baseUri + omiNodeHostName + "/infoitem/";
 
         beans.getObjects().forEach(objectBean -> {
-            objectBean.serialize(model, vf, objectBaseIri, infoItemBaseIri);
+            objectBean.serialize(model, objectBaseIri, infoItemBaseIri);
         });
         return model;
     }
@@ -101,6 +100,11 @@ public class OdfRdfConverter {
         model.setNamespace("dct", NS.DCT);
         model.setNamespace("odf", NS.ODF);
         model.setNamespace("rdf", RDF.NAMESPACE);
+        model.setNamespace("org", NS.ORG);
+        model.setNamespace("ssn", NS.SSN);
+        model.setNamespace("seas", NS.SEAS);
+        model.setNamespace("gr", NS.GR);
+        model.setNamespace("geo", NS.GEO);
     }
 
     private void addCustomNamespaces(Model model, Object object) {

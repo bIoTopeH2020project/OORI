@@ -5,12 +5,15 @@ import de.fraunhofer.iais.eis.biotope.vocabs.ODF;
 import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.eclipse.rdf4j.sail.memory.model.MemValueFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -70,8 +73,8 @@ public class Object {
         this.prefix = prefix;
     }
 
-    public IRI serialize(Model model, ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
-
+    public IRI serialize(Model model, String objectBaseIri, String infoItemBaseIri) {
+        ValueFactory vf = new MemValueFactory();
         IRI subject = vf.createIRI(objectBaseIri + id);
 
         ModelBuilder builder = new ModelBuilder(model);
@@ -81,47 +84,46 @@ public class Object {
 
         if (type != null) {
             try {
-                builder.add("rdf:type", vf.createIRI(type));
+                builder.add("rdf:type", type);
             }
             catch (IllegalArgumentException e) {
                 logger.info("Type is not a valid IRI, omitting additional type assertion.");
             }
         }
 
-        Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
-        infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(vf, objRelatedInfoItemBaseIri)));
+        infoItems.forEach(infoitem -> {
+            IRI infoItemIri = infoitem.serialize(model, objRelatedInfoItemBaseIri);
+            builder.add("odf:infoitem", infoItemIri);
+            addInfoItemValues(infoitem, infoItemIri, model, builder);
+        });
 
-        Collection<Model> nestedObjectsModels = new HashSet<>();
         String nestedObjectsBaseIri = subject.toString() + "/";
-        objects.forEach(object -> nestedObjectsModels.add(object.serialize(vf, nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
-
-        infoItemModels.forEach(model -> {
-            builder.add("odf:infoitem", model.iterator().next().getSubject());
+        objects.forEach(object -> {
+            IRI objectIri = object.serialize(model, nestedObjectsBaseIri, objRelatedInfoItemBaseIri);
+            builder.add("odf:object", objectIri);
         });
 
-        nestedObjectsModels.forEach(model -> {
-            builder.add("odf:object", model.iterator().next().getSubject());
-        });
-
-        addInfoItemValues(vf, builder);
-
-        Model objectModel = builder.build();
-        infoItemModels.forEach(infoItemModel -> objectModel.addAll(infoItemModel));
-        nestedObjectsModels.forEach(nestedObjectsModel -> objectModel.addAll(nestedObjectsModel));
         return subject;
     }
 
-
-
-    private void addInfoItemValues(ValueFactory vf, ModelBuilder builder) {
-        for (InfoItem infoItem : infoItems) {
-            String infoItemType = infoItem.getType();
-            if (infoItemType == null) continue;
-
-            infoItem.getValues().forEach(value -> {
-                builder.add(infoItemType, value.serialize(vf).filter(null, ODF.datavalue, null).objects().iterator().next());
-            });
+    private void addInfoItemValues(InfoItem infoItem, IRI infoItemIri, Model model, ModelBuilder builder) {
+        String infoItemType = infoItem.getType();
+        if (infoItemType == null) {
+            infoItemType = interpretNameAsType(infoItem.getName());
+            if (infoItemType == null) return;
         }
+
+        model.filter(infoItemIri, ODF.value, null).objects().forEach(value -> {
+            model.filter((BNode) value, ODF.datavalue, null).objects().forEach(dataValue -> {
+                builder.add(infoItemType, dataValue);
+            });
+
+        });
     }
+
+    private String interpretNameAsType(String infoItemName) {
+        return infoItemName.contains(":") ? infoItemName : null;
+    }
+
 }

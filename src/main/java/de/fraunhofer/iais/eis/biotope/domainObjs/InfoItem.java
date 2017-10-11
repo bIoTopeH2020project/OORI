@@ -1,16 +1,16 @@
 package de.fraunhofer.iais.eis.biotope.domainObjs;
 
 import de.fraunhofer.iais.eis.biotope.vocabs.NS;
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.eclipse.rdf4j.sail.memory.model.MemValueFactory;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -58,37 +58,25 @@ public class InfoItem {
         this.metaData = metaData;
     }
 
-    public IRI serialize(Model model, ValueFactory vf, String infoItemBaseIri) {
+
+    public IRI serialize(Model model, String infoItemBaseIri) {
+        ValueFactory vf = new MemValueFactory();
         IRI subject = vf.createIRI(infoItemBaseIri + name);
 
-        ModelBuilder builder = new ModelBuilder();
-        builder.setNamespace("dct", NS.DCT)
-                .setNamespace("odf", NS.ODF)
-                .setNamespace("rdf", RDF.NAMESPACE)
-
-                .subject(subject)
+        ModelBuilder builder = new ModelBuilder(model);
+        builder.subject(subject)
                 .add("rdf:type", "odf:InfoItem")
                 .add("dct:title", name);
 
-        Collection<Model> valueModels = new HashSet<>();
-        values.forEach(value -> valueModels.add(value.serialize(vf)));
-
-        valueModels.forEach(model -> {
-            Resource valueId = model.iterator().next().getSubject();
-            builder.add("odf:value", valueId);
+        values.forEach(value -> {
+            BNode valueBnode = value.serialize(model);
+            builder.add("odf:value", valueBnode);
         });
 
-        Collection<Model> metaDataModels = new HashSet<>();
-        metaData.forEach(md -> metaDataModels.add(md.serialize(vf, subject + "/")));
-
-        metaDataModels.forEach(model -> {
-            Resource metadataId = model.iterator().next().getSubject();
-            builder.add("odf:metadata", metadataId);
+        metaData.forEach(md -> {
+            BNode metadataBnode = md.serialize(model, subject + "/");
+            builder.add("odf:metadata", metadataBnode);
         });
-
-        Model infoItemModel = builder.build();
-        valueModels.forEach(valueModel -> infoItemModel.addAll(valueModel));
-        metaDataModels.forEach(metadataModel -> infoItemModel.addAll(metadataModel));
 
         return subject;
     }
