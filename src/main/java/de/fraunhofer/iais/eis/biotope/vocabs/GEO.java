@@ -13,6 +13,6 @@ public class GEO {
 
     // properties
     public final static IRI latitude = factory.createIRI(NS.GEO, "lat");
-    public final static IRI longitude = factory.createIRI(NS.GEO, "long");
+    public final static IRI longitude = factory.createIRI(NS.GEO, "lon");
 
 }

@@ -65,23 +65,16 @@ public class OdfRdfConverterTest {
 
         System.out.println(Util.rdfModelToTurtle(rdfModel));
 
-        // the model contains 3 resources that are of type odf:InfoItem and which have values assigned that use the
-        // properties geo:lat or geo:long or gr:name to link to their values
-        int count = 0;
-        Model model = rdfModel.filter(null, RDF.TYPE, ODF.InfoItem);
-        for (Resource infoItem : model.subjects()) {
-            if (
-            rdfModel.filter(infoItem, null, null).predicates()
-                    .stream().allMatch(predicate ->
-                Arrays.asList(GR.name, GEO.latitude, GEO.longitude).contains(predicate)
-            ))
-			count++;
-		}
-        Assert.assertEquals(3, count);
+        // the model contains 2 objects that have asserted values using custom ontologies
+        Resource commDev = rdfModel.filter(null, RDF.TYPE,  SEAS.LoRaCommunicationDevice).subjects().iterator().next();
+        Assert.assertTrue(rdfModel.filter(commDev, null, null).predicates().containsAll(Arrays.asList(GEO.latitude, GEO.longitude)));
+
+        Resource brand = rdfModel.filter(null, RDF.TYPE,  GR.Brand).subjects().iterator().next();
+        Assert.assertTrue(rdfModel.filter(brand, null, null).predicates().contains(GR.name));
 
         //the model contains 4 Objects that are of type odf:Object AND one of org:Organization, org:OrganizationalUnit, seas:LoRaCommunicationDevice, gr:Brand
-        model=rdfModel.filter(null, RDF.TYPE, ODF.Object);
-        count = 0;
+        Model model=rdfModel.filter(null, RDF.TYPE, ODF.Object);
+        int count = 0;
         for (Statement info : model) {
         	if (rdfModel.contains(info.getSubject(), RDF.TYPE, ORG.Organization) ||
                     rdfModel.contains(info.getSubject(),RDF.TYPE, ORG.OrganizationalUnit) ||

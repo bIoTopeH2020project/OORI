@@ -114,12 +114,12 @@ public class Object {
             if (infoItemType == null) return;
         }
 
-        model.filter(infoItemIri, ODF.value, null).objects().forEach(value -> {
-            model.filter((BNode) value, ODF.datavalue, null).objects().forEach(dataValue -> {
+        for (org.eclipse.rdf4j.model.Value valueNode : model.filter(infoItemIri, ODF.value, null).objects()) {
+            for (org.eclipse.rdf4j.model.Value dataValue : model.filter((BNode) valueNode, ODF.datavalue, null).objects())
+            {
                 builder.add(infoItemType, dataValue);
-            });
-
-        });
+            }
+        };
     }
 
     private String interpretNameAsType(String infoItemName) {
