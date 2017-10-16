@@ -17,7 +17,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {OdfRdfConverter.class})
@@ -92,15 +95,23 @@ public class OdfRdfConverterTest {
 
         System.out.println(Util.rdfModelToTurtle(rdfModel));
 
-        //the model contains 3 Objects that have 2 type definitions
-        Assert.assertEquals(3,
-                rdfModel.filter(null, RDF.TYPE, ODF.Object).subjects().stream().filter(resource -> rdfModel.filter(resource, RDF.TYPE, null).objects().size() == 2).count());
+        Collection<IRI> customPredicates =  Arrays.asList(MV.isOwnedBy,
+                MV.PriceParking,
+                MV.hasTotalCapacity,
+                MV.hasNumberOfVacantParkingSpaces,
+                SCHEMA.depth,
+                SCHEMA.height,
+                SCHEMA.width);
 
-        //exemplary Object that is related to an InfoItem's value literal through the InfoItem's type
-        ValueFactory vf = new MemValueFactory();
-        IRI subj = vf.createIRI("http://localhost/someOmiNode/obj/ParkingService/ParkingFacilities/DipoliParkingLot");
+        int objectsWithCustomPredicates = 0;
+        for (Resource object : rdfModel.filter(null, RDF.TYPE, ODF.Object).subjects()) {
+            Set<IRI> objectPredicates = rdfModel.filter(object, null, null).predicates();
 
-        Assert.assertTrue(rdfModel.contains(subj, MV.isOwnedBy, null));
+            Collection<IRI> intersection = new ArrayList<>(objectPredicates);
+            intersection.retainAll(customPredicates);
+            if (!intersection.isEmpty()) objectsWithCustomPredicates++;
+        }
+        Assert.assertEquals(3, objectsWithCustomPredicates);
     }
 
 }
