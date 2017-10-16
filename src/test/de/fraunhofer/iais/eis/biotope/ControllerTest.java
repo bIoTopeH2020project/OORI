@@ -44,48 +44,26 @@ import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { Controller.class, OdfRdfConverter.class })
-/*
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest("server.port:0")
-*/
+@IntegrationTest
 public class ControllerTest {
 
     @Autowired
     private Controller controller;
 
-    /*
-    @Value("${local.server.port}")
-    int port;
-
-    @Before
-    public void setUp() {
-        RestAssured.port = port;
-    }
-
     @Test
-    public void listDatasetDescriptions() {
+    public void convertOmiResponse_byServiceCall() {
         when().
-                get("/").
+                post("/toRdf").
         then().
                 statusCode(200).
                 body("id.size()", equalTo(1));
     }
 
-    @Test
-    public void getWholeDatasetContent() {
-        Assert.assertEquals(6306600, when().get("/dataset/{id}", 0).asByteArray().length);
-    }
 
     @Test
-    public void getWholeDatasetMetadata() {
-        Assert.assertEquals(HttpStatus.SC_OK, when().get("/dataset/{id}/meta", 0).statusCode());
-        Assert.assertFalse(when().get("/dataset/{id}/meta", 0).body().asString().isEmpty());
-    }
-    */
-
-    @Test
-    public void convertOmiResponse() throws Exception {
+    public void convertOmiResponse_byMethodCall() throws Exception {
         InputStream omiResponse = getClass().getResourceAsStream("/resources/xml/omiResponse.xml");
         String rdf = controller.toRDF(IOUtils.toString(omiResponse, Charset.defaultCharset()), "omiNode");
 

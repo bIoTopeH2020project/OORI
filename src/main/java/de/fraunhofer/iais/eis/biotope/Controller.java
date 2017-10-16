@@ -31,7 +31,7 @@ public class Controller {
     private DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     private String baseUri = System.getenv("BASE_URL");
 
-    @RequestMapping(value = "/toRDF", method = RequestMethod.POST)
+    @RequestMapping(value = "/toRdf", method = RequestMethod.POST)
     @ResponseBody
     public String toRDF(@RequestBody String omiOdfXmlResponse, String omiNodeHostName) throws Exception
     {

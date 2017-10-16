@@ -66,8 +66,6 @@ public class OdfRdfConverterTest {
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Lyon.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
-        System.out.println(Util.rdfModelToTurtle(rdfModel));
-
         // the model contains 2 objects that have asserted values using custom ontologies
         Resource commDev = rdfModel.filter(null, RDF.TYPE,  SEAS.LoRaCommunicationDevice).subjects().iterator().next();
         Assert.assertTrue(rdfModel.filter(commDev, null, null).predicates().containsAll(Arrays.asList(GEO.latitude, GEO.longitude)));
@@ -92,8 +90,6 @@ public class OdfRdfConverterTest {
     public void omi2rdf_with_standard_annotations() throws JAXBException, XMLStreamException {
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
-
-        System.out.println(Util.rdfModelToTurtle(rdfModel));
 
         Collection<IRI> customPredicates =  Arrays.asList(MV.isOwnedBy,
                 MV.PriceParking,
