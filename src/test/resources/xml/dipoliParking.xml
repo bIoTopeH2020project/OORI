@@ -1,0 +1,303 @@
+<omiEnvelope ttl="10" version="1.0" xmlns="http://www.opengroup.org/xsd/omi/1.0/">
+    <response>
+        <result msgformat="odf">
+            <return returnCode="200">
+            </return>
+            <msg>
+                <Objects xmlns="http://www.opengroup.org/xsd/odf/1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:odf="http://www.opengroup.org/xsd/odf/1.0/">
+                    <Object prefix="schema http://www.schema.org/ mv http://www.schema.mobivoc.org/" type="ParkingService">
+                        <id>ParkingService</id>
+                        <Object type="list">
+                            <id>ParkingFacilities</id>
+                            <Object type="schema:ParkingFacility">
+                                <id>DipoliParkingLot</id>
+                                <InfoItem name="MaxParkingHours">
+                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">20</value>
+                                </InfoItem>
+                                <InfoItem type="mv:isOwnedBy" name="Owner">
+                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Aalto University</value>
+                                </InfoItem>
+                                <Object type="list">
+                                    <id>ParkingSpaceTypes</id>
+                                    <Object type="mv:ParkingUsageType">
+                                        <id>CarParkingSpace</id>
+                                        <InfoItem type="mv:PriceParking" name="HourlyPrice">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">2</value>
+                                        </InfoItem>
+                                        <InfoItem type="mv:hasTotalCapacity" name="TotalCapacity">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">6</value>
+                                        </InfoItem>
+                                        <InfoItem type="mv:hasNumberOfVacantParkingSpaces" name="NumberOfVacantParkingSpaces">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">6</value>
+                                        </InfoItem>
+                                        <Object type="schema:Vechile">
+                                            <id>Vehicle</id>
+                                            <InfoItem type="schema:height" name="height">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">2.5m</value>
+                                            </InfoItem>
+                                            <InfoItem type="schema:depth" name="depth">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">3m</value>
+                                            </InfoItem>
+                                            <InfoItem type="schema:width" name="width">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">3m</value>
+                                            </InfoItem>
+                                        </Object>
+                                        <Object type="list">
+                                            <id>Spaces</id>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>Space1</id>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                            </Object>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>Space3</id>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                            </Object>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>Space5</id>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                            </Object>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>Space4</id>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                            </Object>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>Space2</id>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                            </Object>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>Space6</id>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                            </Object>
+                                        </Object>
+                                    </Object>
+                                    <Object type="mv:ParkingUsageType">
+                                        <id>MotorbikeParkingSpace</id>
+                                        <InfoItem type="mv:PriceParking" name="HourlyPrice">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">2</value>
+                                        </InfoItem>
+                                        <InfoItem type="mv:hasNumberOfVacantParkingSpaces" name="NumberOfVacantParkingSpaces">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">2</value>
+                                        </InfoItem>
+                                        <InfoItem type="mv:hasTotalCapacity" name="TotalCapacity">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">2</value>
+                                        </InfoItem>
+                                        <Object type="schema:Vechile">
+                                            <id>Vehicle</id>
+                                            <InfoItem type="schema:height" name="height">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">2.5m</value>
+                                            </InfoItem>
+                                            <InfoItem type="schema:depth" name="depth">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">3m</value>
+                                            </InfoItem>
+                                            <InfoItem type="schema:width" name="width">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">3m</value>
+                                            </InfoItem>
+                                        </Object>
+                                        <Object type="list">
+                                            <id>Spaces</id>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>BikeSpace2</id>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" type="xs:boolean" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                            </Object>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>BikeSpace1</id>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" type="xs:boolean" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                            </Object>
+                                        </Object>
+                                    </Object>
+                                    <Object type="mv:ParkingUsageType">
+                                        <id>ElectricVehicleParkingSpace</id>
+                                        <InfoItem type="mv:hasTotalCapacity" name="TotalCapacity">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">2</value>
+                                        </InfoItem>
+                                        <InfoItem type="mv:hasNumberOfVacantParkingSpaces" name="NumberOfVacantParkingSpaces">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">2</value>
+                                        </InfoItem>
+                                        <InfoItem type="mv:PriceParking" name="HourlyPrice">
+                                            <value unixTime="1506265685" type="xs:int" dateTime="2017-09-24T18:08:05.914+03:00">2</value>
+                                        </InfoItem>
+                                        <Object type="list">
+                                            <id>Spaces</id>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>EVSpace2</id>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                                <Object type="mv:Charger">
+                                                    <id>Charger</id>
+                                                    <InfoItem type="mv:Model" name="Model">
+                                                        <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">ExampleI</value>
+                                                    </InfoItem>
+                                                    <InfoItem name="LidStatus">
+                                                        <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Locked</value>
+                                                    </InfoItem>
+                                                    <InfoItem type="mv:Brand" name="Brand">
+                                                        <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Exampler</value>
+                                                    </InfoItem>
+                                                    <Object type="mv:Plug">
+                                                        <id>Plug</id>
+                                                        <InfoItem type="mv:ChargingSpeed" name="ChargingSpeed">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">mv:Standard</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:Voltage" name="Voltage">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">240V</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:LockerAvailable" name="LockerAvailable">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:CableAvailable" name="CableAvailable">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">false</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:Power" name="Power">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">2400W</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:PlugType" name="PlugType">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Schuko Plug</value>
+                                                        </InfoItem>
+                                                    </Object>
+                                                </Object>
+                                            </Object>
+                                            <Object type="mv:ParkingSpace">
+                                                <id>EVSpace1</id>
+                                                <InfoItem name="Available">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                </InfoItem>
+                                                <InfoItem name="User">
+                                                    <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">NONE</value>
+                                                </InfoItem>
+                                                <Object type="mv:Charger">
+                                                    <id>Charger</id>
+                                                    <InfoItem name="LidStatus">
+                                                        <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Locked</value>
+                                                    </InfoItem>
+                                                    <InfoItem type="mv:Brand" name="Brand">
+                                                        <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Exampler</value>
+                                                    </InfoItem>
+                                                    <InfoItem type="mv:Model" name="Model">
+                                                        <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">ExampleI</value>
+                                                    </InfoItem>
+                                                    <Object type="mv:Plug">
+                                                        <id>Plug</id>
+                                                        <InfoItem type="mv:CableAvailable" name="CableAvailable">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">false</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:Power" name="Power">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">2400W</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:PlugType" name="PlugType">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Schuko Plug</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:Voltage" name="Voltage">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">240V</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:ChargingSpeed" name="ChargingSpeed">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">mv:Standard</value>
+                                                        </InfoItem>
+                                                        <InfoItem type="mv:LockerAvailable" name="LockerAvailable">
+                                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">true</value>
+                                                        </InfoItem>
+                                                    </Object>
+                                                </Object>
+                                            </Object>
+                                        </Object>
+                                        <Object type="schema:Vechile">
+                                            <id>Vehicle</id>
+                                            <InfoItem type="schema:depth" name="depth">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">3m</value>
+                                            </InfoItem>
+                                            <InfoItem type="schema:height" name="height">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">2.5m</value>
+                                            </InfoItem>
+                                            <InfoItem type="schema:width" name="width">
+                                                <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">3m</value>
+                                            </InfoItem>
+                                        </Object>
+                                    </Object>
+                                </Object>
+                                <Object type="schema:GeoCoordinates">
+                                    <id>geo</id>
+                                    <InfoItem name="longitude">
+                                        <value unixTime="1506265685" type="xs:double" dateTime="2017-09-24T18:08:05.914+03:00">24.831899</value>
+                                    </InfoItem>
+                                    <InfoItem name="latitude">
+                                        <value unixTime="1506265685" type="xs:double" dateTime="2017-09-24T18:08:05.914+03:00">60.184274</value>
+                                    </InfoItem>
+                                    <Object type="schema:PostalAddress">
+                                        <id>address</id>
+                                        <InfoItem name="addressCountry">
+                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Finland</value>
+                                        </InfoItem>
+                                        <InfoItem name="addressRegion">
+                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Espoo</value>
+                                        </InfoItem>
+                                        <InfoItem name="streetAddress">
+                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Otakaari 15</value>
+                                        </InfoItem>
+                                        <InfoItem name="addressLocality">
+                                            <value unixTime="1506265685" dateTime="2017-09-24T18:08:05.914+03:00">Otaniemi</value>
+                                        </InfoItem>
+                                        <InfoItem name="postalCode">
+                                            <value unixTime="1506265685" type="xs:double" dateTime="2017-09-24T18:08:05.914+03:00">2150.0</value>
+                                        </InfoItem>
+                                    </Object>
+                                </Object>
+                                <Object type="schema:OpeningHoursSpecification">
+                                    <id>openingHoursSpecification</id>
+                                    <InfoItem name="closes">
+                                        <value unixTime="1506265685" type="schema:Time" dateTime="2017-09-24T18:08:05.914+03:00">24:00</value>
+                                    </InfoItem>
+                                    <InfoItem name="opens">
+                                        <value unixTime="1506265685" type="schema:Time" dateTime="2017-09-24T18:08:05.914+03:00">00:00</value>
+                                    </InfoItem>
+                                </Object>
+                            </Object>
+                        </Object>
+                    </Object>
+                </Objects>
+            </msg>
+        </result>
+    </response>
+</omiEnvelope>

@@ -82,7 +82,7 @@ public class Object {
                 .add("rdf:type", "odf:Object")
                 .add("skos:notation", id);
 
-        if (type != null) {
+        if (type != null && type.contains(":")) {
             try {
                 builder.add("rdf:type", type);
             }
