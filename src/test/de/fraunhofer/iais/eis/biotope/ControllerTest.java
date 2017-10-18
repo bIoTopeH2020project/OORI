@@ -52,6 +52,7 @@ public class ControllerTest {
     @Autowired
     private Controller controller;
 
+    /*
     @Test
     public void convertOmiResponse_byServiceCall() {
         when().
@@ -60,6 +61,7 @@ public class ControllerTest {
                 statusCode(200).
                 body("id.size()", equalTo(1));
     }
+    */
 
 
     @Test

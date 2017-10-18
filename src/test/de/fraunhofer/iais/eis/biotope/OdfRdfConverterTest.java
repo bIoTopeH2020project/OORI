@@ -91,6 +91,8 @@ public class OdfRdfConverterTest {
         InputStream odfStructure = getClass().getResourceAsStream("/resources/xml/annotatedOdf_Helsinki.xml");
         Model rdfModel = odfRdfConverter.odf2rdf(new InputStreamReader(odfStructure), baseUri, omiNodeHostName);
 
+        System.out.println(Util.rdfModelToTurtle(rdfModel));
+
         Collection<IRI> customPredicates =  Arrays.asList(MV.isOwnedBy,
                 MV.PriceParking,
                 MV.hasTotalCapacity,
